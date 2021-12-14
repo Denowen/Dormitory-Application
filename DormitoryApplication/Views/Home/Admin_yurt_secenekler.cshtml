@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Admin Yurt Seçenekler";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yurt Seçenekleri </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <div class="sidebar">
+            <div class="logo_bar">
+               <div class="logo_img"><img src="/img/iu_logo-beyaz.png"></div>
+               <div class="logo_name">Dormitory Application</div> 
+            </div>
+            
+            <ul class="nav_list">
+                <li>
+                    <a href="/Home/Admin_yurt_secenekler">
+                        <span class="links_name">Yurt Seçenekleri</span>
+                    </a>
+                    <span class="tooltip">Yurt Seçenekleri</span>
+                </li>
+                <li>
+                    <a href="/Home/Admin_oda">
+                        <span class="links_name">Oda Seçenekleri</span>
+                    </a>
+                    <span class="tooltip">Oda Seçenekleri</span>
+                </li>
+                <li>
+                    <a href="/Home/Admin_talepler">
+                        <span class="links_name">Talepleri Görüntüle</span>
+                    </a>
+                    <span class="tooltip">Talepleri Görüntüle</span>
+                </li>
+            </ul>
+            <div class="profile_content">
+                <div class="name">Mert Berkan Akdeniz</div>
+                <div class="logout"><a href="#" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
+            </div>
+        </div>
+        <div class="home_content">
+            <form class="oda_sil">
+            <div class="home1">
+                <div class="yurtlar" id="mavi">
+                    <div class="headerr"><h1>Yurt Sil</h1></div>
+                    
+                    <ul class="responsive-table" style="overflow: scroll; max-height: 30rem;">
+                        <li class="table-header">
+                          <div class="col col-1">Oda Numarası</div>
+                          <div class="col col-2">Yurt Tipi</div>
+                          <div class="col col-3">Kapasite</div>
+                          <div class="col col-4">Seç</div>
+                        </li>
+                        <li class="table-row">
+                          <div class="col col-1" data-label="oda">DZ01</div>
+                          <div class="col col-2" data-label="yurt">Turuncu Yurtlar (1 kişilik)</div>
+                          <div class="col col-3" data-label="kapasite">1</div>
+                          <input class="sec" type="radio">
+                        </li>
+                        <li class="table-row">
+                          <div class="col col-1" data-label="oda">DZ02</div>
+                          <div class="col col-2" data-label="yurt">Mavi Yurtlar (1 kişilik)</div>
+                          <div class="col col-3" data-label="kapasite">1</div>
+                          <input class="sec" type="radio">
+                        </li>
+                        <li class="table-row">
+                          <div class="col col-1" data-label="oda">DZ03</div>
+                          <div class="col col-2" data-label="yurt">Bordo Yurtlar (1 kişilik balkonlu-wc-banyolu)</div>
+                          <div class="col col-3" data-label="kapasite">1</div>
+                          <input class="sec" type="radio">
+                        </li>
+                        <li class="table-row">
+                          <div class="col col-1" data-label="oda">DZ04</div>
+                          <div class="col col-2" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı)</div>
+                          <div class="col col-3" data-label="kapasite">3</div>
+                          <input class="sec" type="radio">
+                        </li>
+                      </ul>
+                      <div class="sbmt_bt">
+                        <input type="submit" class="btn" value="SİL">  
+                      </div>
+                      
+                </div>
+            </div>
+        </form>
+
+        <form class="oda_ekle">
+            <div class="home2">
+                <h1>Yurt Ekle</h1>
+                <div class="input-div one">
+                    <input class="input" placeholder="Yurt tipi" type="text">
+                </div>
+                <div class="sbmt_bt2">
+                    <input type="submit" class="btn2" value="EKLE">  
+                </div>
+            </div>
+        </form>
+
+        </div>
+    </div>
+</body>
+</html>

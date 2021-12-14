@@ -5,195 +5,275 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anasayfa </title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anasayfa </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
-    <div class="page">
-      <div class="sidebar">
-        <div class="logo_bar">
-           <div class="logo_img">
-               <img style="width: 100%; height: 100%;" src="~/img/iu_logo-beyaz.png"/>
-           </div>
-           <div class="logo_name">Dormitory Application</div> 
-        </div>
-        
-        <ul class="nav_list">
-            <li>
-                <a href="../views/index.html">
-                    <span class="links_name">Anasayfa</span>
-                </a>
-                <span class="tooltip">Anasayfa</span>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="links_name">Yurt Başvurusu</span>
-                </a>
-                <span class="tooltip">Yurt Başvurusu</span>
-            </li>
-            <li>
-                <a href="../views/dorm-application.html">
-                    <span class="links_name">Talep</span>
-                </a>
-                <span class="tooltip">Talep</span>
-            </li>
-            <li>
-              <a href="../views/odeme.html">
-                  <span class="links_name">Ödemeler</span>
-              </a>
-              <span class="tooltip">Ödemeler</span>
-          </li>
-        </ul>
-        <div class="profile_content">
-            <div class="name">Mert Berkan Akdeniz</div>
-            <div class="logout"><a href="#" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
-        </div>
-    </div>
-    
-        <div class="home_content">
-            <div class="home1">
-                <div class="slider_out">
-                    <div class="slider_in_top">
-                        <div class="in_top1">
-                            <a href="#turuncu"><img class="slider_img" src="../public/img/5119_2_Turuncu-Genel.jpg"/></a>
-                        </div>
-                        <div class="in_top1">
-                            <a href="#mavi"><img class="slider_img" src="../public/img/yurt-3.jpg"/></a>
-                        </div>
-                        <div class="in_top1">
-                            <a href="#bordo"><img class="slider_img" src="../public/img/5118_2_Bordo-Genel.jpg"/></a>
-                        </div>
-                    </div>
-                    <div class="slider_in_down">
-                        <button class="in_down_button"></button>
-                        <button class="in_down_button"></button>
-                        <button class="in_down_button"></button>
-                    </div>
-                </div>
-                <div class="info" id="info">
-                    <div class="info_head">
-                        <h1>Yurt Bilgileri</h1>
-                    </div>
-                    <div class="info_p">
-                        <p>FMV Işık Üniversitesi Şile Kampüsünde yer alan Öğrenci yurtları, öğrencilerimiz tarafından her geçen yıl daha fazla rağbet görmektedir. Deniz ve Orman manzaralı blokları da bulunan Işık Üniversitesi yurtları, öğrencilerin bireysel dünyalarını kurmalarına olanak tanımanın yanı sıra, topluluk dayanışmasını da teşvik eder. Yurtlarımız 16 binada, 1, 3 ve 4 kişilik olmak üzere toplam 1455 yatak kapasitesi mevcuttur. Özel gereksinimli öğrencilerimizin de kullanabileceği 4 oda mevcuttur.<br><br>Yurtlar personelleri 7/24 esasına göre öğrenci taleplerinin ve tespit edilen sorunların yerinde ve zamanında giderilmesini takip etmek ile yurtların genel kontrolü sağlamakla görevlidir. Yurtlarımızın ortak alanları ve odaların bulunduğu koridorlar, güvenlik amacıyla kamera sistemi ile kayıt altına alınmakta, bu kayıtlar, ancak bir olayı aydınlatabilmek için ihtiyaç duyulması halinde ve kontrollü olarak yetkili yurt görevlisi tarafından incelenmektedir. Yurtlarda kalan öğrencilerimiz, Yurt Yaşam Kurallarına uymakla yükümlü olup, aykırılığın tespiti halinde yurt görevlileri tarafından tutanak düzenlenmekte, gerekli görülen hususlar Yurtlar Disiplin Kurulu gündemine alınarak karara bağlanmaktadır.</p>
-                    </div>
-                    <div class="yurtlar" id="turuncu">
-                        <h1>Turuncu Yurt</h1>
-                        <ul class="responsive-table">
-                            <li class="table-header">
-                              <div class="col col-1">Job Id</div>
-                              <div class="col col-2">Customer Name</div>
-                              <div class="col col-3">Amount Due</div>
-                              <div class="col col-4">Payment Status</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42235</div>
-                              <div class="col col-2" data-label="Customer Name">John Doe</div>
-                              <div class="col col-3" data-label="Amount">$350</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42442</div>
-                              <div class="col col-2" data-label="Customer Name">Jennifer Smith</div>
-                              <div class="col col-3" data-label="Amount">$220</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42257</div>
-                              <div class="col col-2" data-label="Customer Name">John Smith</div>
-                              <div class="col col-3" data-label="Amount">$341</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42311</div>
-                              <div class="col col-2" data-label="Customer Name">John Carpenter</div>
-                              <div class="col col-3" data-label="Amount">$115</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                          </ul>
-                    </div>
-                    <div class="yurtlar" id="mavi">
-                        <h1>Mavi Yurt</h1>
-                        <ul class="responsive-table">
-                            <li class="table-header">
-                              <div class="col col-1">Job Id</div>
-                              <div class="col col-2">Customer Name</div>
-                              <div class="col col-3">Amount Due</div>
-                              <div class="col col-4">Payment Status</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42235</div>
-                              <div class="col col-2" data-label="Customer Name">John Doe</div>
-                              <div class="col col-3" data-label="Amount">$350</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42442</div>
-                              <div class="col col-2" data-label="Customer Name">Jennifer Smith</div>
-                              <div class="col col-3" data-label="Amount">$220</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42257</div>
-                              <div class="col col-2" data-label="Customer Name">John Smith</div>
-                              <div class="col col-3" data-label="Amount">$341</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42311</div>
-                              <div class="col col-2" data-label="Customer Name">John Carpenter</div>
-                              <div class="col col-3" data-label="Amount">$115</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                          </ul>
-                    </div>
-                    <div class="yurtlar" id="bordo">
-                        <h1>Bordo Yurt</h1>
-                        <ul class="responsive-table">
-                            <li class="table-header">
-                              <div class="col col-1">Job Id</div>
-                              <div class="col col-2">Customer Name</div>
-                              <div class="col col-3">Amount Due</div>
-                              <div class="col col-4">Payment Status</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42235</div>
-                              <div class="col col-2" data-label="Customer Name">John Doe</div>
-                              <div class="col col-3" data-label="Amount">$350</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42442</div>
-                              <div class="col col-2" data-label="Customer Name">Jennifer Smith</div>
-                              <div class="col col-3" data-label="Amount">$220</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42257</div>
-                              <div class="col col-2" data-label="Customer Name">John Smith</div>
-                              <div class="col col-3" data-label="Amount">$341</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                            <li class="table-row">
-                              <div class="col col-1" data-label="Job Id">42311</div>
-                              <div class="col col-2" data-label="Customer Name">John Carpenter</div>
-                              <div class="col col-3" data-label="Amount">$115</div>
-                              <div class="col col-4" data-label="Payment Status">Pending</div>
-                            </li>
-                          </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="page">
+    <div class="sidebar">
+      <div class="logo_bar">
+        <div class="logo_img"><img src="/img/iu_logo-beyaz.png"></div>
+        <div class="logo_name">Dormitory Application</div>
+      </div>
+
+      <ul class="nav_list">
+        <li>
+          <a href="/Home/Index">
+            <span class="links_name">Anasayfa</span>
+          </a>
+          <span class="tooltip">Anasayfa</span>
+        </li>
+        <li>
+          <a href="#">
+            <span class="links_name">Yurt Başvurusu</span>
+          </a>
+          <span class="tooltip">Yurt Başvurusu</span>
+        </li>
+        <li>
+          <a href="#">
+            <span class="links_name">Talep</span>
+          </a>
+          <span class="tooltip">Talep</span>
+        </li>
+        <li>
+          <a href="/Home/Odeme">
+            <span class="links_name">Ödemeler</span>
+          </a>
+          <span class="tooltip">Ödemeler</span>
+        </li>
+      </ul>
+      <div class="profile_content">
+        <div class="name">Mert Berkan Akdeniz</div>
+        <div class="logout"><a href="#" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
+      </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
-    <script src="/public/js/slider.js"></script>
-    <!-- <script>
+    <div class="home_content">
+      <div class="home1">
+        <div class="slider_out">
+          <div class="slider_in_top">
+            <div class="in_top1">
+              <a href="#turuncu"><img class="slider_img" src="/img/5119_2_Turuncu-Genel.jpg" /></a>
+            </div>
+            <div class="in_top1">
+              <a href="#mavi"><img class="slider_img" src="/img/yurt-3.jpg" /></a>
+            </div>
+            <div class="in_top1">
+              <a href="#bordo"><img class="slider_img" src="/img/5118_2_Bordo-Genel.jpg" /></a>
+            </div>
+          </div>
+          <div class="slider_in_down">
+            <button class="in_down_button"></button>
+            <button class="in_down_button"></button>
+            <button class="in_down_button"></button>
+          </div>
+        </div>
+        <div class="info" id="info">
+          <div class="info_head">
+            <h1>Yurt Bilgileri</h1>
+          </div>
+          <div class="info_p">
+            <p>FMV Işık Üniversitesi Şile Kampüsünde yer alan Öğrenci yurtları, öğrencilerimiz tarafından her geçen yıl
+              daha fazla rağbet görmektedir. Deniz ve Orman manzaralı blokları da bulunan Işık Üniversitesi yurtları,
+              öğrencilerin bireysel dünyalarını kurmalarına olanak tanımanın yanı sıra, topluluk dayanışmasını da teşvik
+              eder. Yurtlarımız 16 binada, 1, 3 ve 4 kişilik olmak üzere toplam 1455 yatak kapasitesi mevcuttur. Özel
+              gereksinimli öğrencilerimizin de kullanabileceği 4 oda mevcuttur.<br><br>Yurtlar personelleri 7/24 esasına
+              göre öğrenci taleplerinin ve tespit edilen sorunların yerinde ve zamanında giderilmesini takip etmek ile
+              yurtların genel kontrolü sağlamakla görevlidir. Yurtlarımızın ortak alanları ve odaların bulunduğu
+              koridorlar, güvenlik amacıyla kamera sistemi ile kayıt altına alınmakta, bu kayıtlar, ancak bir olayı
+              aydınlatabilmek için ihtiyaç duyulması halinde ve kontrollü olarak yetkili yurt görevlisi tarafından
+              incelenmektedir. Yurtlarda kalan öğrencilerimiz, Yurt Yaşam Kurallarına uymakla yükümlü olup, aykırılığın
+              tespiti halinde yurt görevlileri tarafından tutanak düzenlenmekte, gerekli görülen hususlar Yurtlar
+              Disiplin Kurulu gündemine alınarak karara bağlanmaktadır.</p>
+          </div>
+          <div class="yurtlar" id="turuncu">
+            <h1>Turuncu Yurt</h1>
+            <h3 style="margin-bottom: 1rem;">Kız</h3>
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Yurt</div>
+                <div class="col col-2">Bahar Dönemi</div>
+                <div class="col col-3">Güz Dönemi</div>
+                <div class="col col-4">Yıllık</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (1 kişilik)</div>
+                <div class="col col-2" data-label="bahar">13.875₺</div>
+                <div class="col col-3" data-label="güz">13.875₺</div>
+                <div class="col col-4" data-label="yıllık">27.750₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı bahçe katı, kuzey cephe)
+                </div>
+                <div class="col col-2" data-label="bahar">4.800₺</div>
+                <div class="col col-3" data-label="güz">4.800₺</div>
+                <div class="col col-4" data-label="yıllık">9.600₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı)</div>
+                <div class="col col-2" data-label="bahar">5.200₺</div>
+                <div class="col col-3" data-label="güz">5.200₺</div>
+                <div class="col col-4" data-label="yıllık">10.400₺</div>
+              </li>
+            </ul>
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Erkek</h3>
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Yurt</div>
+                <div class="col col-2">Bahar Dönemi</div>
+                <div class="col col-3">Güz Dönemi</div>
+                <div class="col col-4">Yıllık</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (1 kişilik)</div>
+                <div class="col col-2" data-label="bahar">13.875₺</div>
+                <div class="col col-3" data-label="güz">13.875₺</div>
+                <div class="col col-4" data-label="yıllık">27.750₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı bahçe katı, kuzey cephe)
+                </div>
+                <div class="col col-2" data-label="bahar">4.800₺</div>
+                <div class="col col-3" data-label="güz">4.800₺</div>
+                <div class="col col-4" data-label="yıllık">9.600₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı)</div>
+                <div class="col col-2" data-label="bahar">5.200₺</div>
+                <div class="col col-3" data-label="güz">5.200₺</div>
+                <div class="col col-4" data-label="yıllık">10.400₺</div>
+              </li>
+            </ul>
+          </div>
+          <div class="yurtlar" id="mavi">
+            <h1>Mavi Yurt</h1>
+            <h3 style="margin-bottom: 1rem;">Kız</h3>
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Yurt</div>
+                <div class="col col-2">Bahar Dönemi</div>
+                <div class="col col-3">Güz Dönemi</div>
+                <div class="col col-4">Yıllık</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Mavi Yurtlar (1 kişilik)</div>
+                <div class="col col-2" data-label="bahar">11.850₺</div>
+                <div class="col col-3" data-label="güz">11.850₺</div>
+                <div class="col col-4" data-label="yıllık">23.700₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Mavi Yurtlar (3 kişilik ranzalı deniz manzaralı)
+                </div>
+                <div class="col col-2" data-label="bahar">4.750₺</div>
+                <div class="col col-3" data-label="güz">4.750₺</div>
+                <div class="col col-4" data-label="yıllık">9.500₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Mavi Yurtlar (3 kişilik ranzalı)</div>
+                <div class="col col-2" data-label="bahar">4.575₺</div>
+                <div class="col col-3" data-label="güz">4.575₺</div>
+                <div class="col col-4" data-label="yıllık">9.150₺</div>
+              </li>
+            </ul>
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Erkek</h3>
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Yurt</div>
+                <div class="col col-2">Bahar Dönemi</div>
+                <div class="col col-3">Güz Dönemi</div>
+                <div class="col col-4">Yıllık</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Mavi Yurtlar (1 kişilik)</div>
+                <div class="col col-2" data-label="bahar">11.850₺</div>
+                <div class="col col-3" data-label="güz">11.850₺</div>
+                <div class="col col-4" data-label="yıllık">23.700₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Mavi Yurtlar (3 kişilik ranzalı deniz manzaralı)
+                </div>
+                <div class="col col-2" data-label="bahar">4.750₺</div>
+                <div class="col col-3" data-label="güz">4.750₺</div>
+                <div class="col col-4" data-label="yıllık">9.500₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Mavi Yurtlar (3 kişilik ranzalı)</div>
+                <div class="col col-2" data-label="bahar">4.575₺</div>
+                <div class="col col-3" data-label="güz">4.575₺</div>
+                <div class="col col-4" data-label="yıllık">9.150₺</div>
+              </li>
+            </ul>
+          </div>
+          <div class="yurtlar" id="bordo">
+            <h1>Bordo Yurt</h1>
+            <h3 style="margin-bottom: 1rem;">Kız</h3>
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Yurt</div>
+                <div class="col col-2">Bahar Dönemi</div>
+                <div class="col col-3">Güz Dönemi</div>
+                <div class="col col-4">Yıllık</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Bordo Yurtlar (1 kişilik balkonlu-wc-banyolu)</div>
+                <div class="col col-2" data-label="bahar">12.425₺</div>
+                <div class="col col-3" data-label="güz">12.425₺</div>
+                <div class="col col-4" data-label="yıllık">24.850₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Bordo Yurtlar (3 kişilik ranzalı balkonlu-wc-banyolu)</div>
+                <div class="col col-2" data-label="bahar">5.100₺</div>
+                <div class="col col-3" data-label="güz">5.100₺</div>
+                <div class="col col-4" data-label="yıllık">10.200₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Bordo Yurtlar (3 kişilik ranzasız-wc-banyolu)</div>
+                <div class="col col-2" data-label="bahar">6.950₺</div>
+                <div class="col col-3" data-label="güz">6.950₺</div>
+                <div class="col col-4" data-label="yıllık">13.900₺</div>
+              </li>
+            </ul>
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Erkek</h3>
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Yurt</div>
+                <div class="col col-2">Bahar Dönemi</div>
+                <div class="col col-3">Güz Dönemi</div>
+                <div class="col col-4">Yıllık</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Bordo Yurtlar (1 kişilik balkonlu wc/banyo dışarıda)</div>
+                <div class="col col-2" data-label="bahar">11.850₺</div>
+                <div class="col col-3" data-label="güz">11.850₺</div>
+                <div class="col col-4" data-label="yıllık">23.700₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Bordo Yurtlar (3 kişilik ranzalı balkonlu wc/banyo dışarıda)</div>
+                <div class="col col-2" data-label="bahar">4.625₺</div>
+                <div class="col col-3" data-label="güz">4.625₺</div>
+                <div class="col col-4" data-label="yıllık">9.250₺</div>
+              </li>
+              <li class="table-row">
+                <div class="col col-1" data-label="yurt">Bordo Yurtlar (3 kişilik ranzasız wc/banyo dışarıda)</div>
+                <div class="col col-2" data-label="bahar">4.925₺</div>
+                <div class="col col-3" data-label="güz">4.925₺</div>
+                <div class="col col-4" data-label="yıllık">9.850₺</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+  <!-- <script>
         let btn = document.querySelector("#btn");
         let sidebar = document.querySelector(".sidebar");
 
@@ -202,4 +282,5 @@
         }
     </script> -->
 </body>
+
 </html>

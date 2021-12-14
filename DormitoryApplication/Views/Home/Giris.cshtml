@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Giris";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Yurt Başvuru Sistemi</title>
+
+    </head>
+<body>
+
+<img class="waves" src="/img/wave.png" >
+<div class="container">
+    <div class="logo">
+        <h1>Yurt Başvuru Sistemi</h1>
+        <img class="mesale" src="/img/mesale.png">
+
+    </div>
+<div class="genel">
+    <div>
+        <img class="dorm" src="/img/dorm.png">
+    </div>
+    
+<div class="login-container"> 
+    <div class="buttons">
+        <button class="bt active" onclick= "changeColor2()">Öğrenci</button>
+     <button class="bt" onclick = "changeColor()">Admin</button> 
+     </div>
+
+    <form action="index.html">
+        <h2>Hoşgeldiniz</h2>
+        <div class="input-div one">
+            <input class="input" placeholder="E-mail" type="email">
+        </div>
+        <div class="input-div two">
+            <input class="input" placeholder="Şifre" type="password">
+        </div>
+        <a href="../views/sifreunuttum.html">Şifremi Unuttum</a>
+        <input type="submit" class="btn" value="GİRİŞ">
+    </form>
+    <script>
+        function changeColor(){
+            document.body.style.backgroundColor= 'black';
+            document.body.style.color='white';
+        }
+        function changeColor2(){
+            document.body.style.backgroundColor= 'white';
+            document.body.style.color='black';
+        }
+    </script>
+</div>
+
+</div>
+
+</div>
+
+
+</body>
+
+</html>

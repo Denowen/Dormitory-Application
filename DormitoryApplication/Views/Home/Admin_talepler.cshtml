@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Admin Talepler";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oda Seçenekleri </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <div class="sidebar">
+            <div class="logo_bar">
+               <div class="logo_img"><img src="/img/iu_logo-beyaz.png"></div>
+               <div class="logo_name">Dormitory Application</div> 
+            </div>
+            
+            <ul class="nav_list">
+                <li>
+                    <a href="/Home/Admin_yurt_secenekler">
+                        <span class="links_name">Yurt Seçenekleri</span>
+                    </a>
+                    <span class="tooltip">Yurt Seçenekleri</span>
+                </li>
+                <li>
+                    <a href="/Home/Admin_oda">
+                        <span class="links_name">Oda Seçenekleri</span>
+                    </a>
+                    <span class="tooltip">Oda Seçenekleri</span>
+                </li>
+                <li>
+                    <a href="/Home/Admin_talepler">
+                        <span class="links_name">Talepleri Görüntüle</span>
+                    </a>
+                    <span class="tooltip">Talepleri Görüntüle</span>
+                </li>
+            </ul>
+            <div class="profile_content">
+                <div class="name">Mert Berkan Akdeniz</div>
+                <div class="logout"><a href="#" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
+            </div>
+        </div>
+        <div class="home_content">
+            <form class="talep_goruntule" action="/Home/Admin_talep_detay">
+            <div class="home1">
+                <div class="yurtlar" id="mavi">
+                    <div class="headerr"><h1>Talep Görüntüle</h1></div>
+                    
+                    <ul class="responsive-table" style="overflow: scroll; max-height: 30rem;">
+                        <li class="table-header">
+                          <div class="col col-1">Oda Numarası</div>
+                          <div class="col col-2">Yurt Tipi</div>
+                          <div class="col col-3">Talep Tipi</div>
+                          <div class="col col-4">Seç</div>
+                        </li>
+                        <li class="table-row">
+                          <div class="col col-1" data-label="Job Id" onclick="window.location='../views/admin-talep-detay.html'">42235</div>
+                          <div class="col col-2" data-label="Customer Name">John Doe</div>
+                          <div class="col col-3" data-label="Amount">Temizlik</div>
+                          <input class="sec" type="radio">
+                        </li>
+                        
+                        <li class="table-row">
+                          <div class="col col-1" data-label="Job Id">42442</div>
+                          <div class="col col-2" data-label="Customer Name">Jennifer Smith</div>
+                          <div class="col col-3" data-label="Amount">Tamir</div>
+                          <input class="sec" type="radio">
+                        </li>
+                        <li class="table-row">
+                          <div class="col col-1" data-label="Job Id">42257</div>
+                          <div class="col col-2" data-label="Customer Name">John Smith</div>
+                          <div class="col col-3" data-label="Amount">Temizlik</div>
+                          <input class="sec" type="radio">
+                        </li>
+                        <li class="table-row">
+                          <div class="col col-1" data-label="Job Id">42311</div>
+                          <div class="col col-2" data-label="Customer Name">John Carpenter</div>
+                          <div class="col col-3" data-label="Amount">Temizlik</div>
+                          <input class="sec" type="radio">
+                        </li>
+                      </ul>
+                      <div class="sbmt_bt">
+                        <input type="submit" class="btn2" value="GÖRÜNTÜLE">  
+                      </div>
+                      
+                </div>
+            </div>
+        </form>
+
+        
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.waves {
+    position: absolute;
+    bottom: 0;
+    width: -webkit-fill-available;
+    height: fit-content;
+    left: 0;
+    right: 0
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    height: fit-content;
+    border: 2px solid #fff;
+    padding-left: 75px;
+    padding-top: 30px;
+    padding-right: 75px;
+    padding-bottom: 75px;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
+    margin-left: 6rem;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #283691,#4b5bc2,#6F7DD8);
+    background-size: 200%;
+    font-size: 1.2rem;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    margin: 1rem 0;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.bt {
+    width: 100px;
+    height: 25px;
+    border-radius: 25px;
+    border: none;
+    background-size: 200%;
+    display: inline-block;
+    font-size: 1.2rem;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+    .bt:hover {
+        background-color: #4b5bc2;
+        color: white;
+    }
+
+    .bt:focus {
+        background-color: #4b5bc2;
+        color: white;
+    }
+
+.buttons {
+    display: flex;
+    margin-bottom: 3rem;
+}
+
+.input-div {
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px;
+    padding: 5px;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.input {
+    width: fit-content;
+    border: none;
+    outline: none;
+    background: none;
+    color: orange;
+}
+
+a {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    color: #999;
+    font-size: 0.9rem;
+    transition: .3s;
+}
+
+    a:hover {
+        color: orange;
+    }
+
+.logo {
+    display: flex;
+    justify-content: end;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    align-items: center;
+}
+
+    .logo h1 {
+        margin-right: 36rem;
+    }
+
+.genel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.mesale {
+    width: 150px;
+    height: 150px;
+}

@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Odeme";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anasayfa </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <div class="sidebar">
+            <div class="logo_bar">
+               <div class="logo_img"><img src="/img/iu_logo-beyaz.png"></div>
+               <div class="logo_name">Dormitory Application</div> 
+            </div>
+            
+            <ul class="nav_list">
+        <li>
+          <a href="/Home/Index">
+            <span class="links_name">Anasayfa</span>
+          </a>
+          <span class="tooltip">Anasayfa</span>
+        </li>
+        <li>
+          <a href="#">
+            <span class="links_name">Yurt Başvurusu</span>
+          </a>
+          <span class="tooltip">Yurt Başvurusu</span>
+        </li>
+        <li>
+          <a href="#">
+            <span class="links_name">Talep</span>
+          </a>
+          <span class="tooltip">Talep</span>
+        </li>
+        <li>
+          <a href="/Home/Odeme">
+            <span class="links_name">Ödemeler</span>
+          </a>
+          <span class="tooltip">Ödemeler</span>
+        </li>
+      </ul>
+            <div class="profile_content">
+                <div class="name">Mert Berkan Akdeniz</div>
+                <div class="logout"><a href="#" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
+            </div>
+        </div>
+    
+        <div class="home_content">
+            <div class="home1">
+                <div class="baslik-odeme">
+                    <h1>Ödeme</h1>
+                </div>
+                <div class="adada">
+                    <div class="left">
+                        <img src="/img/undraw_credit_card_re_blml.svg"/>
+                    </div>
+                        <div class="right">
+                            <form class="genel">
+                            <div class="info">
+                                <label for="cardnumber">Kart Numarası</label>
+                                <input type="text" pattern="[0-9]{16}" title="Lütfen 16 haneli Kart Numaranızı giriniz." required id="cardnumber" name="cardnumber"/>
+                            </div>
+                            <div class="info">
+                                <label for="cardname">Kart üzerindeki isim:</label>
+                                <input type="text" id="cardname" name="cardname">
+                            </div>
+                            <div class="info">
+                                <label for="cvv">Güvenlik Kodu</label>
+                                <input type="text" pattern="[0-9]{3}" title="Lütfen 3 haneli Güvenlik Kodunuzu giriniz." required id="cvv" name="cvv"/>
+                            </div>
+                            <div class="info">
+                                <label for="expDate">Son Kullanma Tarihi</label>
+                                <select name="month" id="month" style="height: 156%;">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+        
+                                </select>
+                                /
+                                <select name="year" id="year" style="height: 156%;">
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                </select>
+                            </div>
+                            <div class="submit">
+                                <button>Ödeme Yap</button>
+                            </div>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+    <script src="/public/js/slider.js"></script>
+    <!-- <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+
+        btn.onclick = function(){
+            sidebar.classList.toggle("active");
+        }
+    </script> -->
+</body>
+</html>

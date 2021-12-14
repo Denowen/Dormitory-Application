@@ -55,21 +55,6 @@ body {
         height: 100%;
     }
 
-/* .sidebar.active{
-    width: 240px;
-} */
-
-/* 
-.sidebar.active .logo_content .logo{
-    opacity: 1;
-    pointer-events: none;
-} */
-
-
-
-/* .sidebar.active #btn{
-    left: 90%;
-} */
 
 .sidebar ul {
     margin-top: 20px;
@@ -102,9 +87,6 @@ body {
             display: none;
         }
 
-        /* .sidebar.active ul li .tooltip{
-    display: none;
-} */
 
         .sidebar ul li:hover .tooltip {
             transition: all 0.5s ease;
@@ -139,10 +121,6 @@ body {
     transition: all 0.5s ease;
 }
 
-/* .sidebar.active .links_name{
-    opacity: 1;
-    pointer-events: none;
-} */
 
 .profile_content {
     display: flex;
@@ -175,136 +153,10 @@ body {
 }
 
 
-/* .sidebar.active .profile_content .profile{
-    background: #1d1b31;
-} */
 
-
-/* .sidebar.active .profile .profile_details{
-    opacity: 1;
-    pointer-events: auto;
-} */
-
-
-/* .sidebar.active .profile #logout{
-    right: 5%;
-}
-.sidebar.active .profile #logout{
-    background: none;
-} */
-
-
-.home_content {
-    display: flex;
-    flex: 7;
-    overflow: auto;
-    flex-direction: column;
-    font-family: 'Poppins', sans-serif;
-}
-
-.home1 {
-    display: flex;
-    flex-direction: column;
-}
-
-.slider_out {
-    display: flex;
-    flex-direction: column;
-    margin-top: 3rem;
-}
-
-.slider_in_top {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.in_top1 {
-    display: flex;
-    width: 23rem;
-    height: 39rem;
-    margin-right: 1rem;
-    align-items: center;
-    justify-content: center;
-}
-
-    .in_top1 p {
-        font-size: 2rem;
-    }
-
-    .in_top1 img:hover {
-        opacity: 0.8;
-        transform: scale(1.05);
-    }
-
-    .in_top1 img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .in_top1 a {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-.slider_in_down {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 1rem;
-}
-
-.in_down_button {
-    display: flex;
-    size: 4rem;
-    padding-left: 3rem;
-    padding-top: 0.3rem;
-    border-radius: 10rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-}
-
-.slider_in_down :hover {
-    color: blue;
-}
-
-.info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 4rem;
-}
-
-.info_head {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-
-.info_p {
-    display: flex;
-    width: 70%;
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-    ;
-    margin-bottom: 1rem;
-}
-
-.yurtlar {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-}
-
-    .yurtlar h1 {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-    }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -312,58 +164,45 @@ body {
     border-radius: 10rem;
 }
 
-
-
-
-
-
-
-
-
-
-.table-header {
-    background-color: #FBB400;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    border-radius: 3px;
-    padding: 25px 30px;
+.home_content {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
+    flex: 7;
+    overflow: auto;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 6rem;
+    align-items: center;
 }
 
-.table-row {
-    background-color: #ffffff;
-    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
-    border-radius: 3px;
-    padding: 25px 30px;
+.row-content {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 3rem;
 }
 
-.col-1 {
-    flex-basis: 38%;
+    .row-content p {
+        margin-left: 1rem;
+    }
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 1rem 5rem 5rem 5rem;
+    border: 2px solid black;
+    margin-left: 5rem;
+    margin-right: 5rem;
 }
 
-.col-2 {
-    flex-basis: 11%;
+.back-nav {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10rem;
+    margin-right: 90rem;
 }
 
-.col-3 {
-    flex-basis: 10%;
+.parag {
+    display: flex;
+    flex-direction: row;
 }
-
-.col-4 {
-    flex-basis: 10%;
-}
-
-.table-row:hover {
-    background-color: #28369134;
-}
-
-/* .sidebar.active ~ .home_content{
-    left: 240px;
-    width: calc(100% - 240px);
-} */

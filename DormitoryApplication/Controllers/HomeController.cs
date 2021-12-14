@@ -18,7 +18,36 @@ namespace DormitoryApplication.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Giris()
+        {
+            return View();
+        }
+
+        public IActionResult Odeme()
+        {
+            return View();
+        }
+        public IActionResult Sifreunuttum()
+        {
+            return View();
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
+        public IActionResult Admin_yurt_secenekler()
+        {
+            return View();
+        }
+        public IActionResult Admin_talepler()
+        {
+            return View();
+        }
+        public IActionResult Admin_talep_detay()
+        {
+            return View();
+        }
+        public IActionResult Admin_oda()
         {
             return View();
         }
