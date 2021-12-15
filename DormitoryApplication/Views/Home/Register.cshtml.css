@@ -56,13 +56,6 @@ body {
     justify-content: center;
 }
 
-    .detail-part form {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: center;
-        max-width: 40%;
-    }
 
 
 .waves {

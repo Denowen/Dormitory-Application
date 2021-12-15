@@ -1,0 +1,167 @@
+﻿@{
+    ViewData["Title"] = "Yurt Başvurusu";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <title>Yurt Başvurusu</title>
+</head>
+
+<body>
+    <div class="page">
+        <div class="sidebar">
+            <div class="logo_bar">
+               <div class="logo_img"><img src="/img/iu_logo-beyaz.png"></div>
+               <div class="logo_name">Dormitory Application</div> 
+            </div>
+            
+            <ul class="nav_list">
+        <li>
+          <a href="/Home/Index">
+            <span class="links_name">Anasayfa</span>
+          </a>
+          <span class="tooltip">Anasayfa</span>
+        </li>
+        <li>
+          <a href="/Home/Dorm_apply">
+            <span class="links_name">Yurt Başvurusu</span>
+          </a>
+          <span class="tooltip">Yurt Başvurusu</span>
+        </li>
+        <li>
+          <a href="/Home/Talepler">
+            <span class="links_name">Talep</span>
+          </a>
+          <span class="tooltip">Talep</span>
+        </li>
+        <li>
+          <a href="/Home/Odeme">
+            <span class="links_name">Ödemeler</span>
+          </a>
+          <span class="tooltip">Ödemeler</span>
+        </li>
+      </ul>
+            <div class="profile_content">
+                <div class="name">Mert Berkan Akdeniz</div>
+                <div class="logout"><a href="/Home/Giris" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
+            </div>
+        </div>
+
+        <div class="home-content">
+            <div class="option">
+                <select class="request-list">
+                    <option value="" disabled selected>Yurt Listesi</option>
+                    <option value="mavi">Mavi</option>
+                    <option value="bordo">Bordo</option>
+                    <option value="turuncu">Turuncu</option>
+                </select>
+            </div>
+            <div class="form-part">
+                <form class="oda_sil">
+                    <div class="home1">
+                        <div class="yurtlar" id="mavi">
+                            <ul class="responsive-table" style="overflow: scroll; max-height: 30rem;">
+                                <li class="table-header">
+                                    <div class="col col-1">Oda Numarası</div>
+                                    <div class="col col-2">Kapasite</div>
+                                    <div class="col col-3">Kalan Kapasite</div>
+                                    <div class="col col-4">Oda Arkadaşı</div>
+                                    <div class="col col-5">Seç</div>
+                                </li>
+                                <li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li>
+                                <li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li>
+                                <li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li>
+                                <li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li>
+                                <li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li>
+                                <li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li>
+                                <li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li>
+                                <li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li><li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li><li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li><li class="table-row">
+                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
+                                    <div class="col col-2" data-label="Kapasite">3</div>
+                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
+                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                    <input class="sec" type="radio">
+                                </li>
+                                
+                            </ul>
+                            <div class="sbmt_bt">
+                                <input type="submit" class="btn" value="Seç">
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+</body>
+
+</html>

@@ -51,6 +51,14 @@ namespace DormitoryApplication.Controllers
         {
             return View();
         }
+        public IActionResult Dorm_apply()
+        {
+            return View();
+        }
+        public IActionResult Talepler()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

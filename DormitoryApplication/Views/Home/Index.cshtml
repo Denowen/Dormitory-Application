@@ -12,6 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anasayfa </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="/js/slider.js"></script>
 </head>
 
 <body>
@@ -30,13 +31,13 @@
           <span class="tooltip">Anasayfa</span>
         </li>
         <li>
-          <a href="#">
+          <a href="/Home/Dorm_apply">
             <span class="links_name">Yurt Başvurusu</span>
           </a>
           <span class="tooltip">Yurt Başvurusu</span>
         </li>
         <li>
-          <a href="#">
+          <a href="/Home/Talepler">
             <span class="links_name">Talep</span>
           </a>
           <span class="tooltip">Talep</span>
@@ -50,29 +51,14 @@
       </ul>
       <div class="profile_content">
         <div class="name">Mert Berkan Akdeniz</div>
-        <div class="logout"><a href="#" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
+        <div class="logout"><a href="/Home/Giris" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
       </div>
     </div>
 
     <div class="home_content">
       <div class="home1">
-        <div class="slider_out">
-          <div class="slider_in_top">
-            <div class="in_top1">
-              <a href="#turuncu"><img class="slider_img" src="/img/5119_2_Turuncu-Genel.jpg" /></a>
-            </div>
-            <div class="in_top1">
-              <a href="#mavi"><img class="slider_img" src="/img/yurt-3.jpg" /></a>
-            </div>
-            <div class="in_top1">
-              <a href="#bordo"><img class="slider_img" src="/img/5118_2_Bordo-Genel.jpg" /></a>
-            </div>
-          </div>
-          <div class="slider_in_down">
-            <button class="in_down_button"></button>
-            <button class="in_down_button"></button>
-            <button class="in_down_button"></button>
-          </div>
+          <div class="slider">
+          <img class="slider-img" id="slider-img" src="" alt="">
         </div>
         <div class="info" id="info">
           <div class="info_head">

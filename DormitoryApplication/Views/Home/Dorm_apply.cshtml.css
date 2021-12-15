@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
@@ -10,6 +13,8 @@ body {
     min-height: 100vh;
     width: 100%;
     overflow: hidden;
+    background-color: rgb(241 241 241);
+    margin: 0;
 }
 
 .page {
@@ -18,12 +23,23 @@ body {
     width: 100%;
 }
 
+
+.home-content {
+    display: flex;
+    flex: 7;
+    overflow: auto;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10%;
+}
+
 .sidebar {
     display: flex;
     flex: 1;
     flex-direction: column;
     background-color: #283691;
     padding: 6px 14px;
+    z-index: 2;
 }
 
 .logo_name {
@@ -55,9 +71,9 @@ body {
         height: 100%;
     }
 
-
 .sidebar ul {
     margin-top: 20px;
+    padding-inline-start: 0px;
 }
 
     .sidebar ul li {
@@ -86,8 +102,6 @@ body {
             pointer-events: none;
             display: none;
         }
-
-
 
         .sidebar ul li:hover .tooltip {
             transition: all 0.5s ease;
@@ -122,8 +136,6 @@ body {
     transition: all 0.5s ease;
 }
 
-
-
 .profile_content {
     display: flex;
     flex-direction: row;
@@ -155,14 +167,17 @@ body {
 }
 
 
-
-
-.home_content {
+.option {
     display: flex;
-    flex: 7;
-    overflow: auto;
-    flex-direction: column;
-    font-family: 'Poppins', sans-serif;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.request-list {
+    width: 60%;
+    border: none;
+    border: 4px solid #FBB400;
+    border-radius: 1rem;
 }
 
 .home1 {
@@ -191,13 +206,6 @@ body {
         margin-bottom: 2rem;
     }
 
-
-
-
-
-
-
-
 .table-header {
     background-color: #FBB400;
     font-size: 14px;
@@ -217,23 +225,23 @@ body {
     padding: 25px 30px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
 }
 
 .col-1 {
-    flex-basis: 10%;
+    flex-basis: 15%;
 }
 
 .col-2 {
-    flex-basis: 35%;
-}
-
-.col-3 {
     flex-basis: 10%;
 }
 
+.col-3 {
+    flex-basis: 15%;
+}
+
 .col-4 {
-    flex-basis: 3%;
+    flex-basis: 25%;
 }
 
 .btn {
@@ -243,8 +251,7 @@ body {
     border-radius: 25px;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, #E00000,#FF3333,#FF8585);
-    background-size: 200%;
+    background-color: #283691;
     font-size: 1.2rem;
     color: #fff;
     font-family: 'Poppins', sans-serif;
