@@ -143,3 +143,14 @@ a {
     width: 150px;
     height: 150px;
 }
+
+.sifre-img {
+    display: flex;
+    max-height: 32rem;
+    max-width: 48rem;
+}
+
+.sifre-img img {
+    height: 100%;
+    width: 100%;
+}

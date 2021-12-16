@@ -143,3 +143,14 @@ a {
     width: 150px;
     height: 150px;
 }
+
+.giris-img {
+    display: flex;
+    max-height: 34rem;
+    max-width: 38rem;
+}
+
+.giris-img img {
+    height: 100%;
+    width: 100%;
+}

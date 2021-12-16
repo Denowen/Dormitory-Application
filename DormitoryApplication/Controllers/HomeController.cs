@@ -31,6 +31,10 @@ namespace DormitoryApplication.Controllers
         {
             return View();
         }
+        public IActionResult Sifreunuttum2()
+        {
+            return View();
+        }
         public IActionResult Register()
         {
             return View();
