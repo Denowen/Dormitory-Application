@@ -30,7 +30,7 @@ body {
     overflow: auto;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
-    margin-top: 15%;
+    margin-top: 10%;
     justify-content: center;
     align-items: center;
 }
@@ -184,58 +184,67 @@ body {
     justify-content: center;
     z-index: 2;
     max-width: 50%;
-    border: 0.1px solid;
-    border-color: #283691;
+    border: 1px solid rgb(14 36 76);
     box-shadow: 10px 10px 5px #ccc;
 }
 
+.form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    max-width: 100%;
+}
 
 .request-part {
     display: flex;
-    flex: 1;
     justify-content: center;
     align-items: center;
-    max-height: 50px;
+    height: 2.5rem;
+    margin: 1rem 0;
 }
 
 .request-list {
     display: flex;
     flex: 1;
     max-width: 60%;
-    max-height: 30px;
-    border-radius: 1rem;
+    height: 100%;
+    border: 3px solid rgb(239, 169, 34);
+    ;
+    border-radius: 20px;
 }
 
 .dorm-type-part {
     display: flex;
-    flex: 1;
     justify-content: center;
     align-items: center;
-    max-height: 50px;
+    height: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .dorm-type-list {
     display: flex;
     flex: 1;
     max-width: 60%;
-    max-height: 30px;
-    border-radius: 1rem;
+    height: 100%;
+    border: 3px solid rgb(239, 169, 34);
+    border-radius: 20px;
 }
 
 .dorm-room-part {
     display: flex;
-    flex: 1;
     justify-content: center;
     align-items: center;
-    max-height: 50px;
+    height: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .dorm-room-list {
     display: flex;
     flex: 1;
     max-width: 60%;
-    max-height: 30px;
-    border-radius: 1rem;
+    height: 100%;
+    border: 3px solid rgb(239, 169, 34);
+    border-radius: 20px;
 }
 
 .description-part {
@@ -252,6 +261,7 @@ body {
     max-height: 100%;
     word-wrap: break-all;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    border: 2px solid rgb(239, 169, 34);
 }
 
 .button-part {
@@ -281,7 +291,7 @@ body {
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
-    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    background-image: linear-gradient(to right, #efa922, #efa922, #04befe, #3f86ed);
     box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
 }
 
