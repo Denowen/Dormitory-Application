@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Giris";
 }
+@model DormitoryApplication.Models.User
 
 <!DOCTYPE html>
 <html>
@@ -28,14 +29,13 @@
         <button class="bt active" onclick= "changeColor2()">Öğrenci</button>
      <button class="bt" onclick = "changeColor()">Admin</button> 
      </div>
-
-    <form action="/Home/Index">
+     <form action="/Home/Login" method="POST">
         <h2>Hoşgeldiniz</h2>
         <div class="input-div one">
-            <input class="input" placeholder="E-mail" type="email">
+            <input class="input" id="Email" name="Email" placeholder="E-mail" type="email">
         </div>
         <div class="input-div two">
-            <input class="input" placeholder="Şifre" type="password">
+            <input class="input" id="Password" name="Password" placeholder="Şifre" type="password">
         </div>
         <a href="/Home/Sifreunuttum">Şifremi Unuttum</a>
         <input type="submit" class="btn" value="GİRİŞ">

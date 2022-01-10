@@ -27,25 +27,25 @@
         flex: 1;
         flex-direction: column;
         justify-content: center;
-        max-width: 40%;" action="/Home/Giris">
+        max-width: 40%;" action="/Home/Register" method="POST">
                     <h2>Hoşgeldiniz</h2>
                     <div class="input-div one">
-                        <input class="input" placeholder="İsim" type="text" />
+                        <input class="input" name="Name" placeholder="İsim" type="text" />
                     </div>
                     <div class="input-div one">
-                        <input class="input" placeholder="Soyisim" type="text" />
+                        <input class="input" name="Lname" placeholder="Soyisim" type="text" />
                     </div>
                     <div class="input-div one">
-                        <input class="input" placeholder="E-mail" type="email" />
+                        <input class="input" name="Email" placeholder="E-mail" type="email" />
                     </div>
                     <div class="input-div one">
-                        <input class="input" placeholder="Okul Numarası" type="text" />
+                        <input class="input" name="SchoolId" placeholder="Okul Numarası" type="text" />
                     </div>
                     <div class="input-div one">
-                        <input class="input" placeholder="Şifreniz" type="password" />
+                        <input class="input" name="Password" placeholder="Şifreniz" type="password" />
                     </div>
                     <div class="input-div two">
-                        <input class="input" placeholder="Şifre Tekrar" type="password" />
+                        <input class="input" name="Password2" placeholder="Şifre Tekrar" type="password" />
                     </div>
                     <input type="submit" class="btn" value="Üye Ol" />
                 </form>
