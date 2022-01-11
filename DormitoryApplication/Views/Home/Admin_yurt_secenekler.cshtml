@@ -46,42 +46,29 @@
             </div>
         </div>
         <div class="home_content">
-            <form class="oda_sil">
+            <form class="oda_sil" action="/Home/Delete_Dorm" method="POST">
             <div class="home1">
                 <div class="yurtlar" id="mavi">
                     <div class="headerr"><h1>Yurt Sil</h1></div>
                     
                     <ul class="responsive-table" style="overflow: scroll; max-height: 30rem;">
                         <li class="table-header">
-                          <div class="col col-1">Oda Numarası</div>
-                          <div class="col col-2">Yurt Tipi</div>
-                          <div class="col col-3">Kapasite</div>
-                          <div class="col col-4">Seç</div>
+                          <div class="col col-2">Yurt Id</div>
+                          <div class="col col-3">Yurt Tipi</div>
+                          <div class="col col-5">Seç</div>
                         </li>
-                        <li class="table-row">
-                          <div class="col col-1" data-label="oda">DZ01</div>
-                          <div class="col col-2" data-label="yurt">Turuncu Yurtlar (1 kişilik)</div>
-                          <div class="col col-3" data-label="kapasite">1</div>
-                          <input class="sec" type="radio">
-                        </li>
-                        <li class="table-row">
-                          <div class="col col-1" data-label="oda">DZ02</div>
-                          <div class="col col-2" data-label="yurt">Mavi Yurtlar (1 kişilik)</div>
-                          <div class="col col-3" data-label="kapasite">1</div>
-                          <input class="sec" type="radio">
-                        </li>
-                        <li class="table-row">
-                          <div class="col col-1" data-label="oda">DZ03</div>
-                          <div class="col col-2" data-label="yurt">Bordo Yurtlar (1 kişilik balkonlu-wc-banyolu)</div>
-                          <div class="col col-3" data-label="kapasite">1</div>
-                          <input class="sec" type="radio">
-                        </li>
-                        <li class="table-row">
-                          <div class="col col-1" data-label="oda">DZ04</div>
-                          <div class="col col-2" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı)</div>
-                          <div class="col col-3" data-label="kapasite">3</div>
-                          <input class="sec" type="radio">
-                        </li>
+                        @model IEnumerable<DormType>
+                         @foreach (var item in Model)
+                          {
+                          <li class="table-row">
+                          <div class="col col-2" name= "DormTypeId"data-label="yurt_id">@item.Id</div> 
+                          <div class="col col-3" name= "DormTypeName"data-label="yurt">@item.Name</div>
+                          <input class="sec" name="radio_but" type="radio">
+                          </li>
+                                
+                                
+
+                       }
                       </ul>
                       <div class="sbmt_bt">
                         <input type="submit" class="btn" value="SİL">  
@@ -91,11 +78,11 @@
             </div>
         </form>
 
-        <form class="oda_ekle">
+        <form class="oda_ekle" action="/Home/Add_Dorm" method="POST">
             <div class="home2">
                 <h1>Yurt Ekle</h1>
                 <div class="input-div one">
-                    <input class="input" placeholder="Yurt tipi" type="text">
+                    <input class="input" name ="DormTypeName"placeholder="Yurt tipi" type="text">
                 </div>
                 <div class="sbmt_bt2">
                     <input type="submit" class="btn2" value="EKLE">  

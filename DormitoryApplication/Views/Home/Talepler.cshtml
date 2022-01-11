@@ -1,9 +1,19 @@
-﻿@{
+﻿
+@model dynamic
+
+@{
     ViewData["Title"] = "Talepler";
 }
+@{
 
+   IEnumerable<AllDorms> alldorms = ViewData["alldorms"] as IEnumerable<AllDorms>;
+   IEnumerable<RequestType> reqs = ViewData["reqtype"] as IEnumerable<RequestType>;
+   IEnumerable<DormType> dormtys = ViewData["dormtype"] as IEnumerable<DormType>;
+   
+}
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
     <meta charset="UTF-8" />
@@ -72,19 +82,24 @@
                     </div>
                     <div class="dorm-type-part">
                         <select class="dorm-type-list">
+                            
                             <option value="" disabled selected>Yurt Tipi</option>
-                            <option value="turuncu">Turuncu</option>
-                            <option value="bordo">Bordo</option>
-                            <option value="mavi">Mavi</option>
+                            
+                         @foreach (DormType dormtype in Model){
+                            <option value="turuncu">@dormtype.Name</option>
+                            
+                         }
                           </select>
                     </div>
                     <div class="dorm-room-part">
+
                         <select class="dorm-room-list">
                             <option value="" disabled selected>Oda</option>
-                            <option value="volvo">FZ-10</option>
-                            <option value="saab">FZ-11</option>
-                            <option value="opel">FZ-12</option>
-                            <option value="audi">FZ-13</option>
+                            
+                        @foreach (AllDorms alldo in Model){
+                            <option value="volvo">@alldo.DormNo</option>
+                            
+                         }
                           </select>
                     </div>
                     <div class="description-part">

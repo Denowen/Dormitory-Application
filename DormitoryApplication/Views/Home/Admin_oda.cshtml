@@ -59,30 +59,18 @@
                           <div class="col col-3">Kapasite</div>
                           <div class="col col-4">Seç</div>
                         </li>
-                        <li class="table-row">
-                            <div class="col col-1" data-label="oda">DZ01</div>
-                            <div class="col col-2" data-label="yurt">Turuncu Yurtlar (1 kişilik)</div>
-                            <div class="col col-3" data-label="kapasite">1</div>
-                            <input class="sec" type="radio">
-                          </li>
-                          <li class="table-row">
-                            <div class="col col-1" data-label="oda">DZ02</div>
-                            <div class="col col-2" data-label="yurt">Mavi Yurtlar (1 kişilik)</div>
-                            <div class="col col-3" data-label="kapasite">1</div>
-                            <input class="sec" type="radio">
-                          </li>
-                          <li class="table-row">
-                            <div class="col col-1" data-label="oda">DZ03</div>
-                            <div class="col col-2" data-label="yurt">Bordo Yurtlar (1 kişilik balkonlu-wc-banyolu)</div>
-                            <div class="col col-3" data-label="kapasite">1</div>
-                            <input class="sec" type="radio">
-                          </li>
-                          <li class="table-row">
-                            <div class="col col-1" data-label="oda">DZ04</div>
-                            <div class="col col-2" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı)</div>
-                            <div class="col col-3" data-label="kapasite">3</div>
-                            <input class="sec" type="radio">
-                          </li>
+                        @model IEnumerable<AllDorms>
+                         @foreach (var item in Model)
+                            {
+                            <li class="table-row">
+                            <div class="col col-1" data-label="oda">@item.DormNo</div>
+                            <div class="col col-2" data-label="yurt">@item.DormTypeName</div>
+                            <div class="col col-3" data-label="kapasite">@item.Capacity</div>
+                            <input class="sec" name="radio_but" type="radio">
+                          </li>  
+                            }
+                            
+                         
                       </ul>
                       <div class="sbmt_bt">
                         <input type="submit" class="btn" value="SİL">  
@@ -92,20 +80,23 @@
             </div>
         </form>
 
-        <form class="oda_ekle">
+        <form class="oda_ekle" action="/Home/Add_Room" method="POST">
             <div class="home2">
                 <h1>Oda Ekle</h1>
-                <div class="input-div one">
-                    <input class="input" placeholder="Oda Numarası" type="text">
+                <div class="input-div five">
+                    <input class="input" name="DormNo" placeholder="Oda No" type="text">
                 </div>
                 <div class="input-div two">
-                    <input class="input" placeholder="Kapasite" type="text">
+                    <input class="input" name="Capacity"placeholder="Kapasite" type="number">
+                </div>
+                <div class="input-div six">
+                    <input class="input" name="DormTypeId" placeholder="Yurt Id" type="text">
                 </div>
                 <div class="input-div three">
-                    <input class="input" placeholder="Yurt Tipi" type="text">
+                    <input class="input" name="DormTypeName" placeholder="Yurt tipi" type="text">
                 </div>
                 <div class="input-div four">
-                    <input class="input" placeholder="Ücret" type="text">
+                    <input class="input" name="Price" placeholder="Ücret" type="number">
                 </div>
                 <div class="sbmt_bt2">
                     <input type="submit" class="btn2" value="EKLE">  

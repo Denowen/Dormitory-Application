@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace DormitoryApplication.Models
+﻿namespace DormitoryApplication.Models
 {
-    public class AllDorms
+    public class SelectedDorm
     {
         public int Capacity { get; set; }
         public int RemainingCapacity { get; set; }
@@ -10,8 +8,8 @@ namespace DormitoryApplication.Models
 
         public int DormTypeId { get; set; }
 
-        public int Id { get; set; }
-
         public string? DormTypeName { get; set; }
+
+        public int Price { get; set; }
     }
 }
