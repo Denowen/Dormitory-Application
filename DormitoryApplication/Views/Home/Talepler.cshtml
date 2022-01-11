@@ -1,16 +1,11 @@
 ﻿
-@model dynamic
+@using DormitoryApplication.Models;
+@model ViewModel;
 
 @{
     ViewData["Title"] = "Talepler";
 }
-@{
 
-   IEnumerable<AllDorms> alldorms = ViewData["alldorms"] as IEnumerable<AllDorms>;
-   IEnumerable<RequestType> reqs = ViewData["reqtype"] as IEnumerable<RequestType>;
-   IEnumerable<DormType> dormtys = ViewData["dormtype"] as IEnumerable<DormType>;
-   
-}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,39 +65,38 @@
                 <form style="display: flex;
     flex: 1;
     flex-direction: column;
-    max-width: 100%;" action="">
+    max-width: 100%;" action="/Home/Talep_sent" method="POST">
                     <div class="request-part">
-                        <select class="request-list">
+                        <select class="request-list" name="reqType">
                             <option value="" disabled selected>Talep Listesi</option>
-                            <option value="volvo">Yurt Temizliği</option>
-                            <option value="saab">Yurt Değişikliği</option>
-                            <option value="opel">Yurt İlaçlama</option>
-                            <option value="audi">Oda Şikayet</option>
+                             @foreach (RequestType reqtype in Model.reqs){
+                            <option value="@reqtype.Id">@reqtype.Name</option>
+                             }
                           </select>
                     </div>
                     <div class="dorm-type-part">
-                        <select class="dorm-type-list">
+                        <select class="dorm-type-list" name="dormType">
                             
                             <option value="" disabled selected>Yurt Tipi</option>
                             
-                         @foreach (DormType dormtype in Model){
-                            <option value="turuncu">@dormtype.Name</option>
+                         @foreach (DormType dormtype in Model.dt){
+                            <option value="@dormtype.Id">@dormtype.Name</option>
                             
                          }
                           </select>
                     </div>
                     <div class="dorm-room-part">
 
-                        <select class="dorm-room-list">
+                        <select class="dorm-room-list" name="dormNo">
                             <option value="" disabled selected>Oda</option>
                             
-                        @foreach (AllDorms alldo in Model){
-                            <option value="volvo">@alldo.DormNo</option>
+                        @foreach (AllDorms alldo in Model.dorms){
+                            <option value="@alldo.Id">@alldo.DormNo</option>
                             
                          }
                           </select>
                     </div>
-                    <div class="description-part">
+                    <div class="description-part" >
                         <textarea placeholder="Talebinizi Açıklayınız." name="description" class="description" cols="900" rows="15" style="resize: none; overflow: auto;"></textarea>
                     </div>
                     <div class="button-part">

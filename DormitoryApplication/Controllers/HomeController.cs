@@ -35,11 +35,13 @@ namespace DormitoryApplication.Controllers
             {
                 string name = readerr["Name"].ToString();
                 int roleId = (int)readerr["RoleId"];
+                string schoolId = readerr["SchoolId"].ToString();
                 Console.WriteLine("Name: " + name);
                 con.Close();
                 CookieOptions cookie = new CookieOptions();
                 cookie.Expires = DateTime.Now.AddDays(1);
-                Response.Cookies.Append(name, usr.Email, cookie);
+                Response.Cookies.Append("name", name, cookie);
+                Response.Cookies.Append("schoolId", schoolId, cookie);
                 readerr.Close();
 
                 if (roleId == 1)
@@ -275,17 +277,29 @@ namespace DormitoryApplication.Controllers
             string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
             SqlConnection con = new SqlConnection(conString);
+            SqlConnection con2 = new SqlConnection(conString);
+            SqlConnection con3 = new SqlConnection(conString);
 
             string sql = "SELECT * FROM Dormitory_App.[dbo].[RequestsType]";
+            string sql2 = "SELECT * FROM Dormitory_App.[dbo].[Dorms]";
+            string sql3 = "SELECT * FROM Dormitory_App.[dbo].[DormType]";
 
             SqlCommand cmd = new SqlCommand(sql, con);
+            SqlCommand cmd2 = new SqlCommand(sql2, con2);
+            SqlCommand cmd3 = new SqlCommand(sql3, con3);
 
             con.Open();
+            con2.Open();
+            con3.Open();
 
 
             List<RequestType> reqtype = new List<RequestType>();
+            List<AllDorms> alldorms = new List<AllDorms>();
+            List<DormType> dormtype = new List<DormType>();
 
             SqlDataReader reader = cmd.ExecuteReader();
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+            SqlDataReader reader3 = cmd3.ExecuteReader();
 
             while (reader.Read())
             {
@@ -301,72 +315,10 @@ namespace DormitoryApplication.Controllers
                 reqtype.Add(req);
 
             }
-            
-            return View("Talepler", reqtype);
-            con.Close();
-            reader.Close();
-
-        }
-
-        public ActionResult Talep_Load2()
-        {
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
-
-            SqlConnection con2 = new SqlConnection(conString);
-
-            string sql2 = "SELECT * FROM Dormitory_App.[dbo].[DormType]";
-
-            SqlCommand cmd2 = new SqlCommand(sql2, con2);
-
-            con2.Open();
-
-            List<DormType> dormtype = new List<DormType>();
-
-            SqlDataReader reader2 = cmd2.ExecuteReader();
-
-           
             while (reader2.Read())
             {
                 int Id = (int)reader2["Id"];
-                string Name = reader2["Name"].ToString();
-
-                var req = new DormType();
-
-                req.Id = Id;
-                req.Name = Name;
-
-                dormtype.Add(req);
-
-            }
-            return View("Talepler",  dormtype);
-            
-            con2.Close();
-            
-            reader2.Close();
-            
-
-
-        }
-        public ActionResult Talep_Load3()
-        {
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
-
-            SqlConnection con3 = new SqlConnection(conString);
-            string sql3 = "SELECT * FROM Dormitory_App.[dbo].[Dorms]";
-
-            SqlCommand cmd3 = new SqlCommand(sql3, con3);
-
-            con3.Open();
-
-            List<AllDorms> alldorms = new List<AllDorms>();
-           
-            SqlDataReader reader3 = cmd3.ExecuteReader();
-
-           
-            while (reader3.Read())
-            {
-                int Id = (int)reader3["Id"];
-                string DormNo = reader3["DormNo"].ToString();
+                string DormNo = reader2["DormNo"].ToString();
 
                 var req = new AllDorms();
 
@@ -376,19 +328,65 @@ namespace DormitoryApplication.Controllers
                 alldorms.Add(req);
 
             }
-            
-            return View("Talepler", alldorms);
-            
+            while (reader3.Read())
+            {
+                int Id = (int)reader3["Id"];
+                string Name = reader3["Name"].ToString();
+
+                var req = new DormType();
+
+                req.Id = Id;
+                req.Name = Name;
+
+                dormtype.Add(req);
+
+            }
+            ViewModel vw = new ViewModel();
+            vw.dorms = alldorms;
+            vw.dt = dormtype;
+            vw.reqs = reqtype;
+            return View("Talepler", vw);
+            con.Close();
+            con2.Close();
             con3.Close();
+            reader.Close();
+            reader2.Close();
             reader3.Close();
 
         }
 
-
-        [Route("Home/ChooseDorm/{id?}")]
-        public IActionResult ChooseDorm(int? id)
+        [HttpPost]
+        public ActionResult Talep_sent(Talep talep)
         {
-            Console.WriteLine("dormno:", id);
+            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(conString);
+
+            
+            string query = "INSERT INTO Dormitory_App.[dbo].[Requests](Description, isDone, RequestTypeId, UserSchoolId) VALUES (@description, 0, @reqType, @SchoolId)";
+
+            string UserSchoolId = Request.Cookies["schoolId"];
+
+            Console.WriteLine("userschoolId", UserSchoolId);
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@description", talep.description);
+                    cmd.Parameters.AddWithValue("@reqType", talep.reqType);
+                    cmd.Parameters.AddWithValue("@SchoolId", UserSchoolId);
+                    con.Open();
+                    int result = cmd.ExecuteNonQuery();
+                }
+                return RedirectToAction("Talepler", "Home");
+            
+
+        }
+
+
+
+        [Route("Home/ChooseDorm/{id:int}")]
+        public IActionResult ChooseDorm(int id)
+        {
+            Console.WriteLine(id);
             return View("Index");
         }
 
@@ -440,11 +438,6 @@ namespace DormitoryApplication.Controllers
         public IActionResult Talepler()
         {
             Talep_Load();
-            Talep_Load2();
-
-            Talep_Load3();
-
-
             return View();
         }
 
