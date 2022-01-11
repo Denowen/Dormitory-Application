@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Yurt Başvurusu";
+    
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,15 +60,16 @@
         <div class="home-content">
             <h1 style="margin: 0 auto; margin-bottom: 2rem;">Yurt Başvurusu</h1>
             <div class="option">
-                <select class="request-list">
+                <select class="request-list" onChange="val2()" id="select_id2">
                     <option value="" disabled selected>Yurt Listesi</option>
-                    <option value="mavi">Mavi</option>
-                    <option value="bordo">Bordo</option>
-                    <option value="turuncu">Turuncu</option>
+                    <option value=1>Mavi</option>
+                    <option value=2>Bordo</option>
+                    <option value=3>Turuncu</option>
                 </select>
+                
             </div>
             <div class="form-part">
-                <form class="oda_sil">
+                
                     <div class="home1">
                         <div class="yurtlar" id="mavi">
                             <ul class="responsive-table" style="overflow: scroll; max-height: 30rem;">
@@ -77,89 +80,24 @@
                                     <div class="col col-4">Oda Arkadaşı</div>
                                     <div class="col col-5">Seç</div>
                                 </li>
-                                <li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li>
-                                <li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li>
-                                <li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li>
-                                <li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li>
-                                <li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li>
-                                <li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li>
-                                <li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li>
-                                <li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li><li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li><li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li><li class="table-row">
-                                    <div class="col col-1" data-label="Oda Numarası">DZ01</div>
-                                    <div class="col col-2" data-label="Kapasite">3</div>
-                                    <div class="col col-3" data-label="Kalan Kapasite">2</div>
-                                    <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
-                                    <input class="sec" type="radio">
-                                </li>
+                                @model IEnumerable<AllDorms>
+                                @foreach (var item in Model)
+                                {
+                                        <li class="table-row">
+                                        <div class="col col-1" id="DormNo" name="DormNo" data-label="Oda Numarası">@item.DormNo</div>
+                                        <div class="col col-2" data-label="Kapasite">@item.Capacity</div>
+                                        <div class="col col-3" data-label="Kalan Kapasite">@item.RemainingCapacity</div>
+                                        <div class="col col-4" data-label="Oda Arkadaşı">Mert Berkan Akdeniz</div>
+                                        <a class="btn" href="/Home/ChooseDorm/@item.Id"><button>Seç</button></a>
+                                        </li> 
+                                }
+                                
                                 
                             </ul>
-                            <div class="sbmt_bt">
-                                <input type="submit" class="btn" value="Seç">
-                            </div>
 
                         </div>
                     </div>
-                </form>
+                
             </div>
         </div>
     </div>

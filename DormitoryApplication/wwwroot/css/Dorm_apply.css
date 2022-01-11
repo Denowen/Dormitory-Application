@@ -225,6 +225,7 @@ body {
     padding: 25px 30px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 5px;
 }
 
@@ -246,8 +247,8 @@ body {
 
 .btn {
     display: block;
-    width: 30%;
-    height: 50px;
+    width: 10%;
+    height: 30px;
     border-radius: 25px;
     outline: none;
     border: none;

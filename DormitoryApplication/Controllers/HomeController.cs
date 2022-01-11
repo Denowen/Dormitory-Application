@@ -34,11 +34,13 @@ namespace DormitoryApplication.Controllers
             if (readerr.Read())
             {
                 string name = readerr["Name"].ToString();
+               
                 Console.WriteLine("Name: " + name);
                 con.Close();
                 CookieOptions cookie = new CookieOptions();
                 cookie.Expires = DateTime.Now.AddDays(1);
-                Response.Cookies.Append(name, usr.Email, cookie);
+                Response.Cookies.Append("email", usr.Email, cookie);
+                Response.Cookies.Append("fullname", name, cookie);
                 readerr.Close();
                 return RedirectToAction("Index", "Home");
             }
@@ -58,7 +60,7 @@ namespace DormitoryApplication.Controllers
 
             SqlConnection con = new SqlConnection(conString);
 
-            string query = "INSERT INTO Dormitory_App.[dbo].[User](Name, Lname, Email, SchoolId, Password) VALUES (@Name, @Lname, @Email, @SchoolId, @Password)";
+            string query = "INSERT INTO Dormitory_App.[dbo].[User](Name, Lname, Email, SchoolId, Password, RoleId) VALUES (@Name, @Lname, @Email, @SchoolId, @Password, 1)";
 
             if (!usr.Password.Equals(usr.Password2))
             {
@@ -76,9 +78,60 @@ namespace DormitoryApplication.Controllers
                             con.Open();
                             int result = cmd.ExecuteNonQuery();
                         }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Giris", "Home");
             }
 
+        }
+
+        
+        public ActionResult Dorm_Apply2()
+        {
+            string conString = "Data Source=DESKTOP-N9HBLJE; database=Dormitory_App;Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(conString);
+            
+            string sql = "SELECT * FROM Dormitory_App.[dbo].[Dorms]";
+
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            con.Open();
+
+            List<AllDorms> DormsModel = new List<AllDorms>();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+
+            while(reader.Read())
+            {
+                string DormNo = reader["DormNo"].ToString();
+                int RemainingCapacity = (int)reader["RemainingCapacity"];
+                int Capacity = (int)reader["Capacity"];
+                int DormTypeId = (int)reader["DormTypeId"];
+                int Id = (int)reader["Id"];
+
+                var alldorm = new AllDorms();
+
+                alldorm.DormNo = DormNo;
+                alldorm.RemainingCapacity = RemainingCapacity;
+                alldorm.Capacity = Capacity;
+                alldorm.DormTypeId = DormTypeId;
+                alldorm.Id = Id;
+
+                DormsModel.Add(alldorm);
+
+            }
+            return View("Dorm_Apply", DormsModel);
+            con.Close();
+            reader.Close();
+
+        }
+
+
+        [Route("Home/ChooseDorm/{id?}")]
+        public IActionResult ChooseDorm(int? id)
+        {
+            Console.WriteLine("dormno:", id);
+            return View("Index");
         }
 
         public IActionResult Giris()
@@ -120,10 +173,12 @@ namespace DormitoryApplication.Controllers
         }
         public IActionResult Dorm_apply()
         {
+            Dorm_Apply2();
             return View();
         }
         public IActionResult Talepler()
         {
+            
             return View();
         }
 
