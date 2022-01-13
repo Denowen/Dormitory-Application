@@ -9,6 +9,7 @@ namespace DormitoryApplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
          public string conString = "Data Source=DESKTOP-N9HBLJE;Initial Catalog=Dormitory_App;Integrated Security=True";
+        CookieOptions cookie = new CookieOptions();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -37,9 +38,10 @@ namespace DormitoryApplication.Controllers
                 string schoolId = readerr["SchoolId"].ToString();
                 Console.WriteLine("Name: " + name);
                 con.Close();
-                CookieOptions cookie = new CookieOptions();
+                
                 cookie.Expires = DateTime.Now.AddDays(1);
                 Response.Cookies.Append("name", name, cookie);
+                Response.Cookies.Append("roleId", roleId.ToString(), cookie);
                 Response.Cookies.Append("schoolId", schoolId, cookie);
                 readerr.Close();
 
@@ -171,7 +173,7 @@ namespace DormitoryApplication.Controllers
 
             SqlConnection con = new SqlConnection(conString);
 
-            string sql = "SELECT * FROM Dormitory_App.[dbo].[Requests] rqs inner join Dormitory_App.[dbo].[RequestsType] rt on rqs.RequestTypeId = rt.Id";
+            string sql = "SELECT * FROM Dormitory_App.[dbo].[Requests] rqs inner join Dormitory_App.[dbo].[RequestsType] rt on rqs.RequestTypeId = rt.Id WHERE rqs.isDone<1";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -235,8 +237,6 @@ namespace DormitoryApplication.Controllers
                         cmd2.Parameters.AddWithValue("@Capacity", selectedDorm.Capacity);
                         con.Open();
                         cmd2.ExecuteNonQuery();
-
-
                     }
 
             //    }
@@ -377,6 +377,8 @@ namespace DormitoryApplication.Controllers
 
         }
 
+
+
         [HttpPost]
         public ActionResult Talep_sent(Talep talep)
         {
@@ -461,6 +463,27 @@ namespace DormitoryApplication.Controllers
         }
 
 
+        [Route("Home/TalepEnd/{id:int}")]
+        public IActionResult TalepEnd(int id)
+        {
+
+            SqlConnection con = new SqlConnection(conString);
+
+            con.Open();
+
+            string query2 = "UPDATE Dormitory_App.[dbo].[Requests] SET isDone='" + 1 + "' WHERE Id='" + id + "'";
+
+            SqlCommand cmd2 = new SqlCommand(query2, con);
+
+            cmd2.ExecuteNonQuery();
+
+            con.Close();
+
+
+            Dorm_Type();
+            return RedirectToAction("Admin_talepler", "Home");
+        }
+
 
         [Route("Home/DeleteRoom/{id:int}")]
         public IActionResult DeleteRoom(int id)
@@ -531,6 +554,20 @@ namespace DormitoryApplication.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            Console.WriteLine("Girdi");
+            if (Request.Cookies["name"] != null)
+            {
+                Response.Cookies.Delete("name");
+            }
+            if (Request.Cookies["schoolId"] != null)
+            {
+                Response.Cookies.Delete("schoolId");
+            }
+            return RedirectToAction("Giris", "Home");
+        }
+
         public IActionResult Odeme()
         {
             return View();
@@ -549,22 +586,54 @@ namespace DormitoryApplication.Controllers
         }
         public IActionResult Admin_yurt_secenekler()
         {
-            Dorm_Type();
-            return View();
+            if (Request.Cookies["roleId"] == "2" || Request.Cookies["roleId"] == "3")
+            {
+                Dorm_Type();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Giris", "Home");
+            }
+            
         }
         public IActionResult Admin_talepler()
         {
-            Request_Type();
-            return View();
+            if (Request.Cookies["roleId"] != "1")
+            {
+                Request_Type();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Giris", "Home");
+            }
+            
         }
         public IActionResult Admin_talep_detay()
         {
-            return View();
+            if (Request.Cookies["roleId"] == "2" || Request.Cookies["roleId"] == "3")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Giris", "Home");
+            }
+            
         }
         public IActionResult Admin_oda()
         {
-            Dorm_Apply2();
-            return View();
+            if (Request.Cookies["roleId"] == "2" || Request.Cookies["roleId"] == "3")
+            {
+                Dorm_Apply2();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Giris", "Home");
+            }
+            
         }
         public IActionResult Dorm_apply()
         {
