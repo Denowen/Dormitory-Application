@@ -8,6 +8,7 @@ namespace DormitoryApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+         public string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -22,8 +23,6 @@ namespace DormitoryApplication.Controllers
         [HttpPost]
         public ActionResult Login(User usr)
         {
-            
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
             SqlConnection con = new SqlConnection(conString);
             con.Open();
@@ -62,8 +61,6 @@ namespace DormitoryApplication.Controllers
         public ActionResult Register(User usr)
         {
 
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
-
             SqlConnection con = new SqlConnection(conString);
 
             string query = "INSERT INTO Dormitory_App.[dbo].[User](Name, Lname, Email, SchoolId, Password, RoleId) VALUES (@Name, @Lname, @Email, @SchoolId, @Password, 1)";
@@ -92,7 +89,6 @@ namespace DormitoryApplication.Controllers
         
         public ActionResult Dorm_Apply2()
         {
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
             SqlConnection con = new SqlConnection(conString);
             
@@ -135,7 +131,6 @@ namespace DormitoryApplication.Controllers
         }
         public ActionResult Dorm_Type()
         {
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
             SqlConnection con = new SqlConnection(conString);
 
@@ -169,7 +164,6 @@ namespace DormitoryApplication.Controllers
     }
         public ActionResult Request_Type()
         {
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
             SqlConnection con = new SqlConnection(conString);
 
@@ -213,7 +207,6 @@ namespace DormitoryApplication.Controllers
         [HttpPost]
         public ActionResult Add_Room(SelectedDorm selectedDorm)
         {
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
             SqlConnection con = new SqlConnection(conString);
 
@@ -254,7 +247,6 @@ namespace DormitoryApplication.Controllers
         [HttpPost]
         public ActionResult Add_Dorm(SelectedDorm selectedDorm)
         {
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
             SqlConnection con = new SqlConnection(conString);
 
@@ -274,7 +266,6 @@ namespace DormitoryApplication.Controllers
 
         public ActionResult Talep_Load()
         {
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
             SqlConnection con = new SqlConnection(conString);
             SqlConnection con2 = new SqlConnection(conString);
@@ -358,7 +349,6 @@ namespace DormitoryApplication.Controllers
         [HttpPost]
         public ActionResult Talep_sent(Talep talep)
         {
-            string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
 
             SqlConnection con = new SqlConnection(conString);
 
@@ -381,7 +371,29 @@ namespace DormitoryApplication.Controllers
 
         }
 
+        public void DelRoom(int id)
+        {
 
+            SqlConnection con = new SqlConnection(conString);
+
+            string query = "DELETE FROM Dormitory_App.[dbo].[Dorms] WHERE Id='" + id + "'";
+            Console.WriteLine(id);
+            SqlCommand cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+
+        }
+
+        [Route("Home/DeleteRoom/{id:int}")]
+        public IActionResult DeleteRoom(int id)
+        {
+
+            DelRoom(id);
+            Dorm_Apply2();
+            return View("Admin_oda");
+        }
 
         [Route("Home/ChooseDorm/{id:int}")]
         public IActionResult ChooseDorm(int id)
