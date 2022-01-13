@@ -6,7 +6,7 @@
 
         public string Description { get; set; }
 
-        public bool isDone { get; set; }
+        public int isDone { get; set; }
 
         public int RequestTypeId { get; set; }
 

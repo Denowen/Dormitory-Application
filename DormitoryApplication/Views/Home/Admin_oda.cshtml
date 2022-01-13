@@ -52,7 +52,7 @@
                 <div class="yurtlar" id="mavi">
                     <div class="headerr"><h1>Oda Sil</h1></div>
                     
-                    <ul class="responsive-table" style="overflow: scroll; max-height: 30rem;">
+                    <ul class="responsive-table" style="overflow: auto; max-height: 30rem;">
                         <li class="table-header">
                           <div class="col col-1">Oda Numarası</div>
                           <div class="col col-2">Yurt Tipi</div>
@@ -66,15 +66,12 @@
                             <div class="col col-1" data-label="oda">@item.DormNo</div>
                             <div class="col col-2" data-label="yurt">@item.DormTypeName</div>
                             <div class="col col-3" data-label="kapasite">@item.Capacity</div>
-                            <a class="btn" href="/Home/DeleteRoom/@item.Id"><button class="btn">Seç</button></a>
+                            <a class="btn" href="/Home/DeleteRoom/@item.Id">Sil</a>
                           </li>  
                             }
                             
                          
                       </ul>
-                      <div class="sbmt_bt">
-                        <input type="submit" class="btn" value="SİL">  
-                      </div>
                       
                 </div>
             </div>
@@ -91,12 +88,6 @@
                 </div>
                 <div class="input-div six">
                     <input class="input" name="DormTypeId" placeholder="Yurt Id" type="text">
-                </div>
-                <div class="input-div three">
-                    <input class="input" name="DormTypeName" placeholder="Yurt tipi" type="text">
-                </div>
-                <div class="input-div four">
-                    <input class="input" name="Price" placeholder="Ücret" type="number">
                 </div>
                 <div class="sbmt_bt2">
                     <input type="submit" class="btn2" value="EKLE">  

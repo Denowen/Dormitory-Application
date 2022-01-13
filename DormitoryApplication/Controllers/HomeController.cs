@@ -8,7 +8,7 @@ namespace DormitoryApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-         public string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
+         public string conString = "Data Source=DESKTOP-N9HBLJE;Initial Catalog=Dormitory_App;Integrated Security=True";
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -146,12 +146,16 @@ namespace DormitoryApplication.Controllers
             while (reader.Read())
             {
                 string Name = reader["Name"].ToString();
+                string Description = reader["Description"].ToString();
                 int Id = (int)reader["Id"];
+                int Price = (int)reader["Price"];
 
                 var dt = new DormType();
 
                 dt.Name = Name;
                 dt.Id = Id;
+                dt.Description = Description;
+                dt.Price = Price;
 
                 dormtype.Add(dt);
 
@@ -180,7 +184,7 @@ namespace DormitoryApplication.Controllers
             {
                 int Id = (int)reader["Id"];
                 string Description = reader["Description"].ToString();
-                bool isDone = (bool)reader["isDone"];
+                int isDone = (int)reader["isDone"];
                 int RequestTypeId = (int)reader["RequestTypeId"];
                 string UserSchoolId = reader["UserSchoolId"].ToString();
                 string RequestName = reader["Name"].ToString();
@@ -210,7 +214,7 @@ namespace DormitoryApplication.Controllers
 
             SqlConnection con = new SqlConnection(conString);
 
-            string query = "INSERT INTO Dormitory_App.[dbo].[Dorms](DormTypeId, Capacity, RemainingCapacity, Price,DormNo) VALUES (@DormTypeId, @Capacity, @Capacity, @Price, @DormNo)";
+            string query = "INSERT INTO Dormitory_App.[dbo].[Dorms](DormTypeId, Capacity, RemainingCapacity,DormNo) VALUES (@DormTypeId, @Capacity, @Capacity, @DormNo)";
 
             //string query = "select DormNo from Dormitory_App.[dbo].[Dorms] where DormNo= '" + selectedDorm.DormNo + "'";
 
@@ -229,9 +233,8 @@ namespace DormitoryApplication.Controllers
                         cmd2.Parameters.AddWithValue("@DormNo", selectedDorm.DormNo);
                         cmd2.Parameters.AddWithValue("@DormTypeId", selectedDorm.DormTypeId);
                         cmd2.Parameters.AddWithValue("@Capacity", selectedDorm.Capacity);
-                        cmd2.Parameters.AddWithValue("@Price", selectedDorm.Price);
                         con.Open();
-                        int result = cmd2.ExecuteNonQuery();
+                        cmd2.ExecuteNonQuery();
 
 
                     }
@@ -244,24 +247,52 @@ namespace DormitoryApplication.Controllers
 
         }
 
-        [HttpPost]
-        public ActionResult Add_Dorm(SelectedDorm selectedDorm)
+        [Route("Home/Admin_talep_detay2/{id:int}")]
+        public ActionResult Admin_talep_detay2(int id)
         {
 
             SqlConnection con = new SqlConnection(conString);
 
-            string query = "INSERT INTO Dormitory_App.[dbo].[DormType](Name) VALUES (@DormTypeName)";
+            string sql = "SELECT rqs.Id, rqs.Description, rqs.isDone, rt.Name, rqs.DormNo, rqs.DormType, rqs.UserSchoolId FROM Dormitory_App.[dbo].[Requests] rqs inner join Dormitory_App.[dbo].[RequestsType] rt on rqs.RequestTypeId = rt.Id WHERE rqs.Id='" + id + "'";
 
-            using (SqlCommand cmd = new SqlCommand(query, con))
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            con.Open();
+
+            List<Request> reqtype = new List<Request>();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                cmd.Parameters.AddWithValue("@DormTypeName", selectedDorm.DormTypeName);
-                con.Open();
-                int result = cmd.ExecuteNonQuery();
+                int Id = (int)reader["Id"];
+                string Description = reader["Description"].ToString();
+                int isDone = (int)reader["isDone"];
+                string UserSchoolId = reader["UserSchoolId"].ToString();
+                string RequestName = reader["Name"].ToString();
+                string DormNo = reader["DormNo"].ToString();
+                string DormType = reader["DormType"].ToString();
 
+
+                var req = new Request();
+
+                req.Id = Id;
+                req.Description = Description;
+                req.isDone = isDone;
+                req.UserSchoolId = UserSchoolId;
+                req.RequestName = RequestName;
+                req.DormNo = DormNo;
+                req.DormTypeName = DormType;
+
+                reqtype.Add(req);
 
             }
+           
+            con.Close();
+            reader.Close();
 
-            return RedirectToAction("Admin_yurt_secenekler", "Home");
+            return View("Admin_talep_detay", reqtype);
+
+
         }
 
         public ActionResult Talep_Load()
@@ -353,7 +384,7 @@ namespace DormitoryApplication.Controllers
             SqlConnection con = new SqlConnection(conString);
 
             
-            string query = "INSERT INTO Dormitory_App.[dbo].[Requests](Description, isDone, RequestTypeId, UserSchoolId) VALUES (@description, 0, @reqType, @SchoolId)";
+            string query = "INSERT INTO Dormitory_App.[dbo].[Requests](Description, isDone, RequestTypeId, UserSchoolId, DormNo, DormType) VALUES (@description, 0, @reqType, @SchoolId, @DormNo, @DormType)";
 
             string UserSchoolId = Request.Cookies["schoolId"];
 
@@ -363,11 +394,55 @@ namespace DormitoryApplication.Controllers
                     cmd.Parameters.AddWithValue("@description", talep.description);
                     cmd.Parameters.AddWithValue("@reqType", talep.reqType);
                     cmd.Parameters.AddWithValue("@SchoolId", UserSchoolId);
-                    con.Open();
-                    int result = cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@DormNo", talep.dormNo);
+                cmd.Parameters.AddWithValue("@DormType", talep.dormType);
+                con.Open();
+                    cmd.ExecuteNonQuery();
                 }
                 return RedirectToAction("Talepler", "Home");
             
+
+        }
+
+        [Route("Home/DeleteDorm/{id:int}")]
+        public ActionResult DeleteDorm(int id)
+        {
+
+            SqlConnection con = new SqlConnection(conString);
+
+            string query = "DELETE FROM Dormitory_App.[dbo].[DormType] WHERE Id='" + id + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+
+
+            Dorm_Type();
+            return View("Admin_yurt_secenekler");
+
+        }
+
+        [HttpPost]
+        public ActionResult Add_DormType(DormType dormtype)
+        {
+
+            SqlConnection con = new SqlConnection(conString);
+
+            string query = "INSERT INTO Dormitory_App.[dbo].[DormType](Name, Description, Price) VALUES (@Name, @Description, @Price)";
+
+            using (SqlCommand cmd2 = new SqlCommand(query, con))
+            {
+                cmd2.Parameters.AddWithValue("@Name", dormtype.Name);
+                cmd2.Parameters.AddWithValue("@Description", dormtype.Description);
+                cmd2.Parameters.AddWithValue("@Price", dormtype.Price);
+                con.Open();
+                cmd2.ExecuteNonQuery();
+
+            }
+
+            Dorm_Type();
+            return RedirectToAction("Admin_yurt_secenekler", "Home");
 
         }
 
@@ -383,8 +458,9 @@ namespace DormitoryApplication.Controllers
             cmd.ExecuteNonQuery();
             con.Close();
 
-
         }
+
+
 
         [Route("Home/DeleteRoom/{id:int}")]
         public IActionResult DeleteRoom(int id)
@@ -396,10 +472,58 @@ namespace DormitoryApplication.Controllers
         }
 
         [Route("Home/ChooseDorm/{id:int}")]
-        public IActionResult ChooseDorm(int id)
+        public ActionResult ChooseDorm(int id)
         {
-            Console.WriteLine(id);
-            return View("Index");
+
+            SqlConnection con = new SqlConnection(conString);
+
+            string query = "SELECT * FROM Dormitory_App.[dbo].[Dorms] WHERE Id='" + id + "'";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            con.Open();
+
+            List<AllDorms> dorms = new List<AllDorms>();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            int Id = 0;
+            int DormTypeId = 0;
+            int Remaining = 0;
+            while (reader.Read())
+            {
+                Id = (int)reader["Id"];
+                DormTypeId = (int)reader["DormTypeId"];
+                Remaining = (int)reader["RemainingCapacity"];
+                Remaining -= 1;
+
+                var dorms2 = new AllDorms();
+
+                dorms2.Id = Id;
+                dorms2.DormTypeId = DormTypeId;
+                dorms2.RemainingCapacity = Remaining-1;
+
+                dorms.Add(dorms2);
+            }
+            reader.Close();
+            string UserSchoolId = Request.Cookies["schoolId"];
+
+            string query2 = "UPDATE Dormitory_App.[dbo].[User] SET DormId='" + Id + "', DormTypeId='" + DormTypeId + "' WHERE SchoolId='" + UserSchoolId + "'";
+
+            SqlCommand cmd2 = new SqlCommand(query2, con);
+
+            cmd2.ExecuteNonQuery();
+
+            string query3 = "UPDATE Dormitory_App.[dbo].[Dorms] SET RemainingCapacity='" + Remaining + "' WHERE Id='" + Id + "'";
+
+            SqlCommand cmd3 = new SqlCommand(query3, con);
+
+            cmd3.ExecuteNonQuery();
+            con.Close();
+
+            Dorm_Type();
+            return RedirectToAction("Index", "Home");
+
         }
 
         public IActionResult Giris()

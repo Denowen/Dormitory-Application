@@ -80,7 +80,7 @@
                             <option value="" disabled selected>Yurt Tipi</option>
                             
                          @foreach (DormType dormtype in Model.dt){
-                            <option value="@dormtype.Id">@dormtype.Name</option>
+                            <option value="@dormtype.Name">@dormtype.Name</option>
                             
                          }
                           </select>
@@ -91,7 +91,7 @@
                             <option value="" disabled selected>Oda</option>
                             
                         @foreach (AllDorms alldo in Model.dorms){
-                            <option value="@alldo.Id">@alldo.DormNo</option>
+                            <option value="@alldo.DormNo">@alldo.DormNo</option>
                             
                          }
                           </select>

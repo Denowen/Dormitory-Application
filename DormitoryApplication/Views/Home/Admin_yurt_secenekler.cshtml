@@ -51,10 +51,12 @@
                 <div class="yurtlar" id="mavi">
                     <div class="headerr"><h1>Yurt Sil</h1></div>
                     
-                    <ul class="responsive-table" style="overflow: scroll; max-height: 30rem;">
+                    <ul class="responsive-table" style="overflow: auto; max-height: 30rem;">
                         <li class="table-header">
                           <div class="col col-2">Yurt Id</div>
                           <div class="col col-3">Yurt Tipi</div>
+                          <div class="col col-3">Detay</div>
+                          <div class="col col-3">Fiyat</div>
                           <div class="col col-5">Seç</div>
                         </li>
                         @model IEnumerable<DormType>
@@ -63,26 +65,28 @@
                           <li class="table-row">
                           <div class="col col-2" name= "DormTypeId"data-label="yurt_id">@item.Id</div> 
                           <div class="col col-3" name= "DormTypeName"data-label="yurt">@item.Name</div>
-                          <input class="sec" name="radio_but" type="radio">
+                          <div class="col col-3" name= "DormTypeDesc"data-label="yurt">@item.Description</div>
+                          <div class="col col-3" name= "DormTypePrice"data-label="yurt">@item.Price</div>
+                          <a class="btn" href="/Home/DeleteDorm/@item.Id">Sil</a>
                           </li>
-                                
-                                
-
                        }
                       </ul>
-                      <div class="sbmt_bt">
-                        <input type="submit" class="btn" value="SİL">  
-                      </div>
                       
                 </div>
             </div>
         </form>
 
-        <form class="oda_ekle" action="/Home/Add_Dorm" method="POST">
+        <form class="oda_ekle" action="/Home/Add_DormType" method="POST">
             <div class="home2">
                 <h1>Yurt Ekle</h1>
                 <div class="input-div one">
-                    <input class="input" name ="DormTypeName"placeholder="Yurt tipi" type="text">
+                    <input class="input" name ="Name" placeholder="Yurt İsmi" type="text">
+                </div>
+                <div class="input-div one">
+                    <input class="input" name ="Description" placeholder="Detay" type="text">
+                </div>
+                <div class="input-div one">
+                    <input class="input" name ="Price" placeholder="Fiyat" type="number">
                 </div>
                 <div class="sbmt_bt2">
                     <input type="submit" class="btn2" value="EKLE">  
