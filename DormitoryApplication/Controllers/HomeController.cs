@@ -190,6 +190,7 @@ namespace DormitoryApplication.Controllers
             while (reader.Read())
             {
                 string Name = reader["Name"].ToString();
+                string Gender = reader["Gender"].ToString();
                 string Description = reader["Description"].ToString();
                 int Id = (int)reader["Id"];
                 int Price = (int)reader["Price"];
@@ -197,6 +198,7 @@ namespace DormitoryApplication.Controllers
                 var dt = new DormType();
 
                 dt.Name = Name;
+                dt.Gender = Gender;
                 dt.Id = Id;
                 dt.Description = Description;
                 dt.Price = Price;
