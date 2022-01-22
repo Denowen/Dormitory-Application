@@ -473,11 +473,12 @@ namespace DormitoryApplication.Controllers
 
             SqlConnection con = new SqlConnection(conString);
 
-            string query = "INSERT INTO Dormitory_App.[dbo].[DormType](Name, Description, Price) VALUES (@Name, @Description, @Price)";
+            string query = "INSERT INTO Dormitory_App.[dbo].[DormType](Name, Description, Price, Gender) VALUES (@Name, @Description, @Price, @Gender)";
 
             using (SqlCommand cmd2 = new SqlCommand(query, con))
             {
                 cmd2.Parameters.AddWithValue("@Name", dormtype.Name);
+                cmd2.Parameters.AddWithValue("@Gender", dormtype.Gender);
                 cmd2.Parameters.AddWithValue("@Description", dormtype.Description);
                 cmd2.Parameters.AddWithValue("@Price", dormtype.Price);
                 con.Open();
