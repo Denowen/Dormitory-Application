@@ -16,8 +16,50 @@ namespace DormitoryApplication.Controllers
             _logger = logger;
         }
 
+        public ActionResult DormType_List_Home()
+        {
+
+            SqlConnection con = new SqlConnection(conString);
+
+            string sql = "SELECT * FROM Dormitory_App.[dbo].[DormType]";
+
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            con.Open();
+
+            List<DormType> DormTypeModel = new List<DormType>();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                string DormTypeName = reader["Name"].ToString();
+                string DormTypeDesc = reader["Description"].ToString();
+                string Gender = reader["Gender"].ToString();
+                int Price = (int)reader["Price"];
+                int Id = (int)reader["Id"];
+
+                var alldorm = new DormType();
+
+                alldorm.Name = DormTypeName;
+                alldorm.Id = Id;
+                alldorm.Price = Price;
+                alldorm.Description = DormTypeDesc;
+                alldorm.Gender = Gender;
+
+                DormTypeModel.Add(alldorm);
+
+            }
+            return View("Index", DormTypeModel);
+            con.Close();
+            reader.Close();
+
+        }
+
         public IActionResult Index()
         {
+            DormType_List_Home();
             return View();
         }
 
