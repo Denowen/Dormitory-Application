@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Admin Yurt Seçenekler";
+
 }
 
 <!DOCTYPE html>
@@ -78,14 +79,18 @@
             </div>
         </form>
 
+
         <form class="oda_ekle" action="/Home/Add_DormType" method="POST">
             <div class="home2">
                 <h1>Yurt Ekle</h1>
                 <div class="input-div one">
-                    <input class="input" name ="Name" placeholder="Yurt İsmi" type="text">
+                    <input class="input" name ="Id" placeholder="Id (Sadece güncelleme yapacağınızda giriniz)" type="text">
                 </div>
                 <div class="input-div one">
-                    <input class="input" name ="Description" placeholder="Detay" type="text">
+                    <input class="input" name ="Name" placeholder="Yurt İsmi (Örn: Turuncu)" type="text">
+                </div>
+                <div class="input-div one">
+                    <input class="input" name ="Description" placeholder="Detay (Örn: Yurtlar (1 kişilik))" type="text">
                 </div>
                 <div class="input-div one">
                     <input class="input" name ="Price" placeholder="Fiyat" type="number">
@@ -94,10 +99,11 @@
                     <input class="input" name ="Gender" placeholder="Cinsiyet" type="text">
                 </div>
                 <div class="sbmt_bt2">
-                    <input type="submit" class="btn2" value="EKLE">  
+                    <input type="submit" class="btn2" value="EKLE / GÜNCELLE">  
                 </div>
             </div>
-        </form>
+                </form>
+
 
         </div>
     </div>

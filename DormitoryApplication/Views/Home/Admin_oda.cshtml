@@ -54,17 +54,19 @@
                     
                     <ul class="responsive-table" style="overflow: auto; max-height: 30rem;">
                         <li class="table-header">
-                          <div class="col col-1">Oda Numarası</div>
-                          <div class="col col-2">Yurt Tipi</div>
+                          <div class="col col-3">Id</div>
+                          <div class="col col-3">Oda Numarası</div>
+                          <div class="col col-3">Yurt Tipi</div>
                           <div class="col col-3">Kapasite</div>
-                          <div class="col col-4">Seç</div>
+                          <div class="col col-3">Seç</div>
                         </li>
                         @model IEnumerable<AllDorms>
                          @foreach (var item in Model)
                             {
                             <li class="table-row">
-                            <div class="col col-1" data-label="oda">@item.DormNo</div>
-                            <div class="col col-2" data-label="yurt">@item.DormTypeName</div>
+                            <div class="col col-3" data-label="Id">@item.Id</div>
+                            <div class="col col-3" data-label="oda">@item.DormNo</div>
+                            <div class="col col-3" data-label="yurt">@item.DormTypeName</div>
                             <div class="col col-3" data-label="kapasite">@item.Capacity</div>
                             <a class="btn" href="/Home/DeleteRoom/@item.Id">Sil</a>
                           </li>  
@@ -81,6 +83,9 @@
             <div class="home2">
                 <h1>Oda Ekle</h1>
                 <div class="input-div five">
+                    <input class="input" name="Id" placeholder="Id (Sadece güncelleme yapacağınızda giriniz)" type="text">
+                </div>
+                <div class="input-div five">
                     <input class="input" name="DormNo" placeholder="Oda No" type="text">
                 </div>
                 <div class="input-div two">
@@ -90,7 +95,7 @@
                     <input class="input" name="DormTypeId" placeholder="Yurt Id" type="text">
                 </div>
                 <div class="sbmt_bt2">
-                    <input type="submit" class="btn2" value="EKLE">  
+                    <input type="submit" class="btn2" value="EKLE / GÜNCELLE">  
                   </div>
             </div>
         </form>

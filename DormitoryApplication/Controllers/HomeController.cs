@@ -151,6 +151,7 @@ namespace DormitoryApplication.Controllers
             {
                 string DormNo = reader["DormNo"].ToString();
                 string DormTypeName = reader["Name"].ToString();
+                string DormTypeName2 = reader["Description"].ToString();
                 int RemainingCapacity = (int)reader["RemainingCapacity"];
                 int Capacity = (int)reader["Capacity"];
                 int DormTypeId = (int)reader["DormTypeId"];
@@ -162,7 +163,7 @@ namespace DormitoryApplication.Controllers
                 alldorm.RemainingCapacity = RemainingCapacity;
                 alldorm.Capacity = Capacity;
                 alldorm.DormTypeId = DormTypeId;
-                alldorm.DormTypeName = DormTypeName;
+                alldorm.DormTypeName = DormTypeName + " " + DormTypeName2;
                 alldorm.Id = Id;
 
                 DormsModel.Add(alldorm);
@@ -260,31 +261,32 @@ namespace DormitoryApplication.Controllers
 
             SqlConnection con = new SqlConnection(conString);
 
-            string query = "INSERT INTO Dormitory_App.[dbo].[Dorms](DormTypeId, Capacity, RemainingCapacity,DormNo) VALUES (@DormTypeId, @Capacity, @Capacity, @DormNo)";
+            if(selectedDorm.Id >= 0)
+            {
+                string query = "UPDATE Dormitory_App.[dbo].[Dorms] SET DormNo='" + selectedDorm.DormNo + "' ,Capacity='" + selectedDorm.Capacity + "' ,RemainingCapacity='" + selectedDorm.RemainingCapacity + "' ,DormTypeId='" + selectedDorm.DormTypeId + "' WHERE Id='" + selectedDorm.Id + "'";
 
-            //string query = "select DormNo from Dormitory_App.[dbo].[Dorms] where DormNo= '" + selectedDorm.DormNo + "'";
+                SqlCommand cmd2 = new SqlCommand(query, con);
+                con.Open();
+                cmd2.ExecuteNonQuery();
+
+                con.Close();
+            }
+            else
+            {
+                string query = "INSERT INTO Dormitory_App.[dbo].[Dorms](DormTypeId, Capacity, RemainingCapacity,DormNo) VALUES (@DormTypeId, @Capacity, @Capacity, @DormNo)";
+
+
+                using (SqlCommand cmd2 = new SqlCommand(query, con))
+                {
+                    cmd2.Parameters.AddWithValue("@DormNo", selectedDorm.DormNo);
+                    cmd2.Parameters.AddWithValue("@DormTypeId", selectedDorm.DormTypeId);
+                    cmd2.Parameters.AddWithValue("@Capacity", selectedDorm.Capacity);
+                    con.Open();
+                    cmd2.ExecuteNonQuery();
+                }
+            }
 
             
-            //SqlCommand cmd = new SqlCommand(query, con);
-            
-            //SqlDataReader readerr = cmd.ExecuteReader();
-            //if (readerr.Read())
-            //{
-            //    string dormno = readerr["DormNo"].ToString();
-            //    if(!dormno.Equals(selectedDorm.DormNo.ToString()))
-            //    {
-            //        Console.WriteLine("hilalll");
-                    using (SqlCommand cmd2 = new SqlCommand(query, con))
-                    {
-                        cmd2.Parameters.AddWithValue("@DormNo", selectedDorm.DormNo);
-                        cmd2.Parameters.AddWithValue("@DormTypeId", selectedDorm.DormTypeId);
-                        cmd2.Parameters.AddWithValue("@Capacity", selectedDorm.Capacity);
-                        con.Open();
-                        cmd2.ExecuteNonQuery();
-                    }
-
-            //    }
-            //}
 
             return RedirectToAction("Admin_oda", "Home");
             
@@ -472,8 +474,20 @@ namespace DormitoryApplication.Controllers
         [HttpPost]
         public ActionResult Add_DormType(DormType dormtype)
         {
-
             SqlConnection con = new SqlConnection(conString);
+            
+
+            if (dormtype.Id >= 0)
+            {
+                string query = "UPDATE Dormitory_App.[dbo].[DormType] SET Name='" + dormtype.Name + "' ,Description='" + dormtype.Description + "' ,Price='" + dormtype.Price + "' ,Gender='" + dormtype.Gender + "' WHERE Id='" + dormtype.Id + "'";
+
+                SqlCommand cmd2 = new SqlCommand(query, con);
+                con.Open();
+                cmd2.ExecuteNonQuery();
+
+                con.Close();
+            }
+            else { 
 
             string query = "INSERT INTO Dormitory_App.[dbo].[DormType](Name, Description, Price, Gender) VALUES (@Name, @Description, @Price, @Gender)";
 
@@ -486,6 +500,7 @@ namespace DormitoryApplication.Controllers
                 con.Open();
                 cmd2.ExecuteNonQuery();
 
+            }
             }
 
             Dorm_Type();
@@ -683,6 +698,11 @@ namespace DormitoryApplication.Controllers
         public IActionResult Dorm_apply()
         {
             Dorm_Apply2();
+            return View();
+        }
+
+        public IActionResult Profile()
+        {
             return View();
         }
         public IActionResult Talepler()
