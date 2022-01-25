@@ -3,6 +3,8 @@
 *@
 @{
 }
+@using DormitoryApplication.Models;
+@model Profile;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +64,7 @@
         <div class="profile_content">
           <div class="name">Mert Berkan Akdeniz</div>
           <div class="logout">
-            <a href="../views/giris.html" id="logout"
+            <a href="/Home/giris" id="logout"
               ><i class="fa fa-sign-out" style="font-size: 20px"></i
             ></a>
           </div>
@@ -73,15 +75,17 @@
         <div class="user-detail-part">
           <h2 class="header">Kullanıcı Bilgilerim</h2>
           <form action="" class="user-form">
+            @foreach (User usr in Model.usr){
               <div class="user-form-detail">
                 <div class="user-form-left">
+                   
                     <div class="user-form-row">
                         <label>İsim</label>
                         <input
                           type="text"
                           name="name"
                           id="name"
-                          value="Mert Berkan"
+                          value="@usr.Name"
                           disabled
                           class="user-input"
                         />
@@ -92,7 +96,7 @@
                             type="text"
                             name="surname"
                             id="surname"
-                            value="mert.akdeniz@isik.edu.tr"
+                            value="@usr.Lname"
                             disabled
                             class="user-input"
                           />
@@ -103,7 +107,7 @@
                             type="text"
                             name="email"
                             id="email"
-                            value="mert.akdeniz@isik.edu.tr"
+                            value="@usr.Email"
                             disabled
                             class="user-input"
                           />
@@ -114,7 +118,7 @@
                             type="text"
                             name="schoolId"
                             id="schoolId"
-                            value="217CS2014"
+                            value="@usr.SchoolId"
                             disabled
                             class="user-input"
                           />
@@ -145,7 +149,7 @@
                             type="text"
                             name="dormType"
                             id="dormType"
-                            value="Turuncu"
+                            value="@usr.DormTypeId"
                             disabled
                             class="user-input"
                           />
@@ -156,13 +160,14 @@
                             type="text"
                             name="dormNo"
                             id="dormNo"
-                            value="DZ10"
+                            value="@usr.DormId"
                             disabled
                             class="user-input"
                           />
                         </div>
                   </div>
               </div>
+              }
               <div class="user-form-button-part">
                   <button class="submit-button" type="submit">Güncelle</button>
               </div>
@@ -182,11 +187,22 @@
                     <div class="col col-2">Talep Sonucu</div>
                     <div class="col col-3">Seç</div>
                   </li>
-                  <li class="table-row">
-                    <div class="col col-1" data-label="Talep Tipi">Gürültü</div>
-                    <div class="col col-2 center" data-label="Talep Sonucu">Bekleniyor</div>
+                  @foreach(Request req in Model.req){
+                                    string done = "";
+                                    if (@req.isDone == 1)
+                                    {
+                                        done = "Talep sonlandı";
+                                    }
+                                    else
+                                    {
+                                        done = "Bekleniyor";
+                                    }
+                                    <li class="table-row">
+                    <div class="col col-1" data-label="Talep Tipi">@req.RequestName</div>
+                    <div class="col col-2 center" data-label="Talep Sonucu">@done</div>
                     <button type="submit" class="btn">Seç</button>
                   </li>
+                  }
                 </ul>
               </div>
             </div>

@@ -701,10 +701,93 @@ namespace DormitoryApplication.Controllers
             return View();
         }
 
+        public ActionResult Profile_detail()
+        {
+            SqlConnection con = new SqlConnection(conString);
+
+            con.Open();
+
+            string UserSchoolId = Request.Cookies["schoolId"];
+
+            string sql = "SELECT * FROM Dormitory_App.[dbo].[User] WHERE SchoolId='" + UserSchoolId + "'";
+
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+
+            List<User> UserList = new List<User>();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            int dormid3 = 0;
+
+            while (reader.Read())
+            {
+                string name = reader["Name"].ToString();
+                string lname = reader["Lname"].ToString();
+                string email = reader["Email"].ToString();
+                string schoolid = reader["SchoolId"].ToString();
+                string dormtype = reader["DormTypeId"].ToString();
+                string dormid = reader["DormId"].ToString();
+                int dormid2 = (int)reader["DormId"];
+                dormid3 = dormid2;
+
+                var usr = new User();
+
+                usr.Name = name;
+                usr.Email = email;
+                usr.Lname = lname;
+                usr.SchoolId = schoolid;
+                usr.DormTypeId = dormtype;
+                usr.DormId = dormid;
+
+                UserList.Add(usr);
+
+            }
+            SqlConnection con2 = new SqlConnection(conString);
+            
+            con2.Open();
+            string sql2 = "SELECT s.Id, s.isDone, v.Name FROM Dormitory_App.[dbo].[Requests] s JOIN Dormitory_App.[dbo].[RequestsType] v ON s.RequestTypeId = v.Id WHERE s.UserSchoolId ='" + "217CS2013" + "'";
+
+            SqlCommand cmd2 = new SqlCommand(sql2, con2);
+
+            List<Request> UserList2 = new List<Request>();
+
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+
+            while (reader2.Read())
+            {
+                string name = (string)reader2["Name"];
+                int idd = (int)reader2["Id"];
+                int isDone = (int)reader2["isDone"];
+
+                var req = new Request();
+
+                req.RequestName = name; 
+                req.Id = idd;
+                req.isDone = isDone;
+
+
+                UserList2.Add(req);
+
+            }
+
+            Profile pf = new Profile();
+            pf.usr = UserList;
+            pf.req = UserList2;
+            return View("Profile", pf);
+            con.Close();
+            con2.Close();
+            reader.Close();
+            reader2.Close();
+
+        }
+
         public IActionResult Profile()
         {
+            Profile_detail();
             return View();
         }
+
         public IActionResult Talepler()
         {
             Talep_Load();

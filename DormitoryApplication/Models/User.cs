@@ -8,6 +8,10 @@
         public string? SchoolId { get; set; }
         public string? Password { get; set; }
         public string? Password2 { get; set; }
-        
+        public string? DormTypeId { get; set; }
+        public string? DormId { get; set; }
+        public string? DormName { get; set; }
+        public string? DormTypeName { get; set; }
+
     }
 }
