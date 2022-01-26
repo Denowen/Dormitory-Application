@@ -13,5 +13,7 @@ namespace DormitoryApplication.Models
         public int Id { get; set; }
 
         public string? DormTypeName { get; set; }
+
+        public string? RoomMate { get; set; }
     }
 }
