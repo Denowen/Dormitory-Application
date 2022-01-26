@@ -137,20 +137,21 @@ namespace DormitoryApplication.Controllers
             SqlConnection con = new SqlConnection(conString);
             SqlConnection con2 = new SqlConnection(conString);
             
+                
             string sql = "SELECT * FROM Dormitory_App.[dbo].[Dorms] dm inner join Dormitory_App.[dbo].[DormType] dt on dm.DormTypeId = dt.Id";
             string sql2 = "SELECT * FROM Dormitory_App.[dbo].[Applications] WHERE dormId = @dormId";
+            
 
             SqlCommand cmd = new SqlCommand(sql, con);
             
+            
             con.Open();
             
-
+            
             List<AllDorms> DormsModel = new List<AllDorms>();
 
             SqlDataReader reader = cmd.ExecuteReader();
             
-            
-
 
             while (reader.Read())
             {
@@ -194,9 +195,9 @@ namespace DormitoryApplication.Controllers
             con2.Close();
             reader2.Close();
             }
+
             
             return View("Dorm_Apply", DormsModel);
-            
             
             reader.Close();
             
@@ -551,6 +552,24 @@ namespace DormitoryApplication.Controllers
 
         }
 
+        public bool checkApplication()
+        {
+            bool result = false;
+            string UserSchoolId = Request.Cookies["schoolId"];
+            SqlConnection con3 = new SqlConnection(conString);
+
+            string sql3 = "SELECT * FROM Dormitory_App.[dbo].[Applications] WHERE schoolId='" + UserSchoolId + "'";
+            SqlCommand cmd3 = new SqlCommand(sql3, con3);
+            con3.Open();
+            SqlDataReader reader3 = cmd3.ExecuteReader();
+
+            if (reader3.Read())
+            {
+                result = true;
+            }
+            return result;
+        }
+
 
         [Route("Home/TalepEnd/{id:int}")]
         public IActionResult TalepEnd(int id)
@@ -705,6 +724,10 @@ namespace DormitoryApplication.Controllers
         {
             return View();
         }
+        public IActionResult Success()
+        {
+            return View();
+        }
         public IActionResult Sifreunuttum()
         {
             return View();
@@ -770,7 +793,16 @@ namespace DormitoryApplication.Controllers
         }
         public IActionResult Dorm_apply()
         {
-            Dorm_Apply2();
+            bool res = checkApplication();
+            if (res)
+            {
+                return View("Success", "Home");
+            }
+            else
+            {
+                Dorm_Apply2();
+            }
+            
             return View();
         }
 

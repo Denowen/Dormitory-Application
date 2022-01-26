@@ -281,3 +281,17 @@ body {
     left: 240px;
     width: calc(100% - 240px);
 } */
+
+.adahilal{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:8rem;
+
+}
+
+.image1{
+    width:23rem;
+    margin-bottom:2rem;
+    margin-left:2rem;
+}
