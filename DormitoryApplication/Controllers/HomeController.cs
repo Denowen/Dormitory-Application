@@ -8,7 +8,7 @@ namespace DormitoryApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-         public string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
+         public string conString = "Data Source=DESKTOP-N9HBLJE;Initial Catalog=Dormitory_App;Integrated Security=True";
         CookieOptions cookie = new CookieOptions();
 
         public HomeController(ILogger<HomeController> logger)
@@ -720,6 +720,28 @@ namespace DormitoryApplication.Controllers
             return RedirectToAction("Giris", "Home");
         }
 
+        [HttpPost]
+        public ActionResult Dorm_pay()
+        {
+            string schoolid = Request.Cookies["schoolId"];
+
+            SqlConnection con = new SqlConnection(conString);
+
+            con.Open();
+
+            string query2 = "UPDATE Dormitory_App.[dbo].[User] SET isPaid=1 WHERE SchoolId='" + schoolid + "'";
+
+            SqlCommand cmd2 = new SqlCommand(query2, con);
+
+            cmd2.ExecuteNonQuery();
+
+            con.Close();
+
+
+
+            return RedirectToAction("Profile", "Home");
+        }
+
         public IActionResult Odeme()
         {
             return View();
@@ -814,10 +836,9 @@ namespace DormitoryApplication.Controllers
 
             string UserSchoolId = Request.Cookies["schoolId"];
 
-            string sql = "SELECT * FROM Dormitory_App.[dbo].[User] WHERE SchoolId='" + UserSchoolId + "'";
+            string sql = "SELECT u.Name as Name, u.Lname, u.Email, u.SchoolId, d.DormNo, f.Name as Name2, f.Description FROM Dormitory_App.[dbo].[User] u JOIN Dormitory_App.[dbo].[Dorms] d ON u.DormId=d.Id JOIN Dormitory_App.[dbo].[DormType] f ON u.DormTypeId=f.Id WHERE u.SchoolId='" + UserSchoolId + "'";
 
             SqlCommand cmd = new SqlCommand(sql, con);
-
 
             List<User> UserList = new List<User>();
 
@@ -835,29 +856,37 @@ namespace DormitoryApplication.Controllers
                 string email = reader["Email"].ToString();
                 string schoolid = reader["SchoolId"].ToString();
 
-                if (reader["DormId"] == DBNull.Value)
+                if (reader["DormNo"] == DBNull.Value)
                 {
-                    int dormid2 = 0;
-                    string dormid = string.Empty;
-                    usr.DormId = dormid;
+                    string dormid = " ";
+                    usr.DormName = dormid;
                 }
                 else
                 {
-                    string dormid = reader["DormId"].ToString();
-                    int dormid2 = (int)reader["DormId"];
-                    dormid3 = dormid2;
-                    usr.DormId = dormid;
+                    string dormid = reader["DormNo"].ToString();
+                    usr.DormName = dormid;
                 }
 
-                if (reader["DormTypeId"] == DBNull.Value)
+                if (reader["Name2"] == DBNull.Value)
                 {
-                    string dormtype = string.Empty;
-                    usr.DormTypeId = dormtype;
+                    string dormtype = " ";
+                    usr.DormTypeName = dormtype;
                 }
                 else
                 {
-                    string dormtype = reader["DormTypeId"].ToString();
-                    usr.DormTypeId = dormtype;
+                    string dormtype = reader["Name2"].ToString();
+                    usr.DormTypeName = dormtype;
+                }
+
+                if (reader["Description"] == DBNull.Value)
+                {
+                    string desc = string.Empty;
+                    usr.DormTypeName += desc;
+                }
+                else
+                {
+                    string desc = reader["Description"].ToString();
+                    usr.DormTypeName += desc;
                 }
 
 
@@ -874,7 +903,7 @@ namespace DormitoryApplication.Controllers
             SqlConnection con2 = new SqlConnection(conString);
 
             con2.Open();
-            string sql2 = "SELECT s.Id, s.isDone, v.Name FROM Dormitory_App.[dbo].[Requests] s JOIN Dormitory_App.[dbo].[RequestsType] v ON s.RequestTypeId = v.Id WHERE s.UserSchoolId ='" + "217CS2013" + "'";
+            string sql2 = "SELECT s.Id, s.isDone, v.Name FROM Dormitory_App.[dbo].[Requests] s JOIN Dormitory_App.[dbo].[RequestsType] v ON s.RequestTypeId = v.Id WHERE s.UserSchoolId ='" + UserSchoolId + "'";
 
             SqlCommand cmd2 = new SqlCommand(sql2, con2);
 
@@ -910,6 +939,41 @@ namespace DormitoryApplication.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult Profile_edit(User usr)
+        {
+
+            string schoolid = Request.Cookies["schoolId"];
+
+            SqlConnection con = new SqlConnection(conString);
+
+            con.Open();
+
+            if(usr.Password != null && usr.Password2 != null)
+            {
+                if ((usr.Password == usr.Password2) && (usr.Password != null))
+                {
+                    string query2 = "UPDATE Dormitory_App.[dbo].[User] SET Password='" + usr.Password + "' WHERE SchoolId='" + schoolid + "'";
+                    SqlCommand cmd2 = new SqlCommand(query2, con);
+
+                    cmd2.ExecuteNonQuery();
+
+                    con.Close();
+                }
+            }
+
+            return RedirectToAction("Profile", "Home");
+
+        }
+
+
+
+
+
+            
+
+            
+
         public IActionResult Profile()
         {
             Profile_detail();
@@ -919,6 +983,58 @@ namespace DormitoryApplication.Controllers
         public IActionResult Talepler()
         {
             Talep_Load();
+            return View();
+        }
+
+        [Route("Home/usrDetay/{id:int}")]
+        public ActionResult usrDetay(int id)
+        {
+            SqlConnection con = new SqlConnection(conString);
+
+            string sql = "SELECT rqs.Id, rqs.Description, rqs.isDone, rt.Name, rqs.DormNo, rqs.DormType, rqs.UserSchoolId, rqs.Response FROM Dormitory_App.[dbo].[Requests] rqs inner join Dormitory_App.[dbo].[RequestsType] rt on rqs.RequestTypeId = rt.Id WHERE rqs.Id='" + id + "'";
+
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            con.Open();
+
+            List<Request> reqtype = new List<Request>();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int Id = (int)reader["Id"];
+                string Description = reader["Description"].ToString();
+                int isDone = (int)reader["isDone"];
+                string UserSchoolId = reader["UserSchoolId"].ToString();
+                string RequestName = reader["Name"].ToString();
+                string DormNo = reader["DormNo"].ToString();
+                string DormType = reader["DormType"].ToString();
+                string response = reader["Response"].ToString();
+
+
+                var req = new Request();
+
+                req.Id = Id;
+                req.Response = response;
+                req.Description = Description;
+                req.isDone = isDone;
+                req.UserSchoolId = UserSchoolId;
+                req.RequestName = RequestName;
+                req.DormNo = DormNo;
+                req.DormTypeName = DormType;
+
+                reqtype.Add(req);
+
+            }
+
+            con.Close();
+            reader.Close();
+
+            return View("userTalepDetay", reqtype);
+        }
+
+        public IActionResult userTalepDetay()
+        {
             return View();
         }
 

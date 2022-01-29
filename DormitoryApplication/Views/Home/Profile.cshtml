@@ -74,7 +74,7 @@
       <div class="home-content">
         <div class="user-detail-part">
           <h2 class="header">Kullanıcı Bilgilerim</h2>
-          <form action="" class="user-form">
+          <form action="/Home/Profile_edit" method="post" class="user-form">
             @foreach (User usr in Model.usr){
               <div class="user-form-detail">
                 <div class="user-form-left">
@@ -138,8 +138,8 @@
                           <label>Şifre Onay</label>
                           <input
                             type="password"
-                            name="passwordConfirm"
-                            id="passwordConfirm"
+                            name="password2"
+                            id="password2"
                             class="user-input"
                           />
                         </div>
@@ -149,7 +149,7 @@
                             type="text"
                             name="dormType"
                             id="dormType"
-                            value="@usr.DormTypeId"
+                            value="@usr.DormTypeName"
                             disabled
                             class="user-input"
                           />
@@ -160,7 +160,7 @@
                             type="text"
                             name="dormNo"
                             id="dormNo"
-                            value="@usr.DormId"
+                            value="@usr.DormName"
                             disabled
                             class="user-input"
                           />
@@ -200,7 +200,7 @@
                                     <li class="table-row">
                     <div class="col col-1" data-label="Talep Tipi">@req.RequestName</div>
                     <div class="col col-2 center" data-label="Talep Sonucu">@done</div>
-                    <button type="submit" class="btn">Seç</button>
+                    <a class="btn" href="/Home/usrDetay/@req.Id">Görüntüle</a>
                   </li>
                   }
                 </ul>

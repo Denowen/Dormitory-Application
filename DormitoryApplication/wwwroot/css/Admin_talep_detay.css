@@ -188,12 +188,12 @@ body {
 
 .detail {
     display: flex;
-    flex: 1;
     flex-direction: column;
     width: 80%;
     max-height: 80%;
     align-items: flex-start;
     border: 2px solid black;
+    padding-bottom: 1rem;
 }
 
 .back-nav {
@@ -211,7 +211,6 @@ body {
 
 .btnpart{
     display: flex;
-    flex: 1;
 
 }
 

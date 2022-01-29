@@ -18,5 +18,6 @@
 
         public string DormTypeName { get; set; }
 
+        public string Response { get; set; }
     }
 }
