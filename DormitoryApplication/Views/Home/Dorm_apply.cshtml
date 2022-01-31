@@ -69,16 +69,15 @@
         <div class="home-content">
             <h1 style="margin: 0 auto; margin-bottom: 2rem;">Yurt Başvurusu</h1>
             <div class="option">
-                <form action="/Home/" method="POST">
-                <select class="request-list" onChange="val2()" id="select_id2">
+                <form style="display: flex;" action="/Home/Dorm_Apply3" method="POST">
+                <select name="Name" class="request-list" >
                     <option value="" disabled selected>Yurt Listesi</option>
                    @foreach (DormType dormtype in Model.dt){
-                            <option value="@dormtype.Name">@dormtype.Name</option>
-                            
+                            <option name="Name" id="Name" value="@dormtype.Name">@dormtype.Name</option>
                          }
                     
                 </select>
-                <button>Seç</button>
+                <button class="btn5">Seç</button>
                 </form>
             </div>
             <div class="form-part">
