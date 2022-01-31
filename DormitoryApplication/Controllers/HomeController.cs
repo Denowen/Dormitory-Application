@@ -693,7 +693,7 @@ namespace DormitoryApplication.Controllers
 
             con2.Open();
             SqlDataReader reader2 = cmd4.ExecuteReader();
-            
+
             
             while (reader2.Read())
             {
@@ -705,11 +705,17 @@ namespace DormitoryApplication.Controllers
                 
                
             }
-            
-            con2.Close();
             reader2.Close();
+            string query6 = "UPDATE Dormitory_App.[dbo].[Applications] SET roomMate='" + roomMate + "' WHERE dormId='" + Id + "'";
+            SqlCommand cmd6 = new SqlCommand(query6, con2);
+            cmd6.ExecuteNonQuery();
+
+            con2.Close();
+            
 
             
+
+
             string query5 = "INSERT INTO Dormitory_App.[dbo].[Applications](schoolId, dormId, dormTypeId, roomMate) VALUES (@schoolId, @dormId, @dormTypeId, @roomMate)";
             using (SqlCommand cmd5 = new SqlCommand(query5, con3))
             {
