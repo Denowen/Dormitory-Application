@@ -2,13 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace DormitoryApplication.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-         public string conString = "Data Source=DESKTOP-N9HBLJE;Initial Catalog=Dormitory_App;Integrated Security=True";
+         public string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
         CookieOptions cookie = new CookieOptions();
 
         public HomeController(ILogger<HomeController> logger)
@@ -78,6 +81,8 @@ namespace DormitoryApplication.Controllers
                 string name = readerr["Name"].ToString();
                 int roleId = (int)readerr["RoleId"];
                 string schoolId = readerr["SchoolId"].ToString();
+                string email = readerr["Email"].ToString();
+                Console.WriteLine(email);
                 Console.WriteLine("Name: " + name);
                 con.Close();
                 
@@ -85,6 +90,7 @@ namespace DormitoryApplication.Controllers
                 Response.Cookies.Append("name", name, cookie);
                 Response.Cookies.Append("roleId", roleId.ToString(), cookie);
                 Response.Cookies.Append("schoolId", schoolId, cookie);
+                Response.Cookies.Append("email", email, cookie);
                 readerr.Close();
 
                 if (roleId == 1)
@@ -570,6 +576,25 @@ namespace DormitoryApplication.Controllers
             return result;
         }
 
+        public static void MailSender(string body, string sendEmail, string subject)
+        {
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("yurtlar.destek@gmail.com");
+                mail.To.Add(sendEmail);
+                mail.Subject = subject;
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("yurtlar.destek@gmail.com", "yurt1234");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                }
+            }
+        }
+
 
         [Route("Home/TalepEnd/{id:int}")]
         public IActionResult TalepEnd(int id)
@@ -680,6 +705,7 @@ namespace DormitoryApplication.Controllers
                 
                
             }
+            
             con2.Close();
             reader2.Close();
 
@@ -695,7 +721,11 @@ namespace DormitoryApplication.Controllers
                 cmd5.ExecuteNonQuery();
 
             }
-            
+            string em = Request.Cookies["email"];
+            string nm = Request.Cookies["name"];
+            string bod = "<h3>Yurt Başvurunuz Başarılı</h3><p>Sevgili " + nm + ", </p><p>Yurt başvurunuz başarılı bir şekilde alınmıştır, teşekkür ederiz.</p>";
+            MailSender(bod, em, "Yurt Başvurusu");
+
             Dorm_Type();
             return RedirectToAction("Odeme", "Home");
 
@@ -703,6 +733,7 @@ namespace DormitoryApplication.Controllers
 
         public IActionResult Giris()
         {
+            
             return View();
         }
 
@@ -756,6 +787,7 @@ namespace DormitoryApplication.Controllers
         }
         public IActionResult Sifreunuttum2()
         {
+           
             return View();
         }
         public IActionResult Register()
