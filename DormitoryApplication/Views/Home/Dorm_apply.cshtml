@@ -1,4 +1,7 @@
-﻿@{
+﻿@using DormitoryApplication.Models;
+@model ViewModel;
+
+@{
     ViewData["Title"] = "Yurt Başvurusu";
     
 }
@@ -66,13 +69,16 @@
         <div class="home-content">
             <h1 style="margin: 0 auto; margin-bottom: 2rem;">Yurt Başvurusu</h1>
             <div class="option">
+                <form action="/Home/DormTypeFill" method="POST">
                 <select class="request-list" onChange="val2()" id="select_id2">
                     <option value="" disabled selected>Yurt Listesi</option>
-                    <option value=1>Mavi</option>
-                    <option value=2>Bordo</option>
-                    <option value=3>Turuncu</option>
+                   @foreach (DormType dormtype in Model.dt){
+                            <option value="@dormtype.Name">@dormtype.Name</option>
+                            
+                         }
+                    
                 </select>
-                
+                </form>
             </div>
             <div class="form-part">
                 
@@ -86,15 +92,15 @@
                                     <div class="col col-4">Oda Arkadaşı</div>
                                     <div class="col col-5">Seç</div>
                                 </li>
-                                @model IEnumerable<AllDorms>
-                                @foreach (var item in Model)
+                                
+                                @foreach (AllDorms alldo in Model.dorms)
                                 {
                                         <li class="table-row">
-                                        <div class="col col-1" id="DormNo" name="DormNo" data-label="Oda Numarası">@item.DormNo</div>
-                                        <div class="col col-2" data-label="Kapasite">@item.Capacity</div>
-                                        <div class="col col-3" data-label="Kalan Kapasite">@item.RemainingCapacity</div>
-                                        <div class="col col-4" data-label="Oda Arkadaşı">@item.RoomMate</div>
-                                        <a class="btn" href="/Home/ChooseDorm/@item.Id">Seç</a>
+                                        <div class="col col-1" id="DormNo" name="DormNo" data-label="Oda Numarası">@alldo.DormNo</div>
+                                        <div class="col col-2" data-label="Kapasite">@alldo.Capacity</div>
+                                        <div class="col col-3" data-label="Kalan Kapasite">@alldo.RemainingCapacity</div>
+                                        <div class="col col-4" data-label="Oda Arkadaşı">@alldo.RoomMate</div>
+                                        <a class="btn" href="/Home/ChooseDorm/@alldo.Id">Seç</a>
                                         </li> 
                                 }
                                 

@@ -140,6 +140,34 @@ namespace DormitoryApplication.Controllers
         public ActionResult Dorm_Apply2()
         {
 
+            SqlConnection con3 = new SqlConnection(conString);
+            string sql3 = "SELECT * FROM Dormitory_App.[dbo].[DormType]";
+
+            SqlCommand cmd3 = new SqlCommand(sql3, con3);
+
+            con3.Open();
+            List<DormType> dormtype = new List<DormType>();
+
+            SqlDataReader reader3 = cmd3.ExecuteReader();
+
+            while (reader3.Read())
+            {
+                int Id = (int)reader3["Id"];
+                string Name = reader3["Name"].ToString();
+
+                var req = new DormType();
+
+                req.Id = Id;
+                req.Name = Name;
+
+                dormtype.Add(req);
+
+            }
+            ViewModel vw = new ViewModel();
+            vw.dt = dormtype;
+            con3.Close();
+            reader3.Close();
+
             SqlConnection con = new SqlConnection(conString);
             SqlConnection con2 = new SqlConnection(conString);
             
@@ -198,12 +226,13 @@ namespace DormitoryApplication.Controllers
                     DormsModel[i].RoomMate = RoomMate;
 
                 }
+                vw.dorms = DormsModel;
             con2.Close();
             reader2.Close();
             }
 
             
-            return View("Dorm_Apply", DormsModel);
+            return View("Dorm_Apply", vw);
             
             reader.Close();
             
@@ -458,6 +487,7 @@ namespace DormitoryApplication.Controllers
             reader3.Close();
 
         }
+
 
 
 
