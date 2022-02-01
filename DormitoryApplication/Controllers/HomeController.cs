@@ -1387,6 +1387,45 @@ namespace DormitoryApplication.Controllers
             cmd2.ExecuteNonQuery();
 
 
+
+
+            SqlConnection con2 = new SqlConnection(conString);
+
+            string sql = "SELECT usr.Email, usr.Name, usr.Lname, rq.DormNo, rq.DormType, rq.Description, rq.Response FROM Dormitory_App.[dbo].[User] usr JOIN Dormitory_App.[dbo].[Requests] rq ON usr.SchoolId=rq.UserSchoolId WHERE rq.ID='" + id + "'";
+
+            SqlCommand cmd = new SqlCommand(sql, con2);
+
+            con2.Open();
+
+            string Description="";
+            string Email="";
+            string Name = "";
+            string Lname = "";
+            string dormno = "";
+            string dormtype = "";
+            string response = "";
+
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                
+                Description = reader["Description"].ToString();
+                Email = reader["Email"].ToString();
+                Name = reader["Name"].ToString();
+                Lname = reader["Lname"].ToString();
+                dormno = reader["DormNo"].ToString();
+                dormtype = reader["DormType"].ToString();
+                response = reader["Response"].ToString();
+
+                
+
+            }
+            MailSender("<p>Sayın " + Name + " " + Lname + "</p>" + "<p> Oda no: " + dormno + " Yurt: " + dormtype + "</p>" + "<p> " + Description + "</p>" + "<p> Açtığınız talebiniz sonlandırılmıştır. </p>" + "<p> Cevap: " + response + "</p>", Email, "Talebiniz Sonuçlanmıştır");
+
+            con.Close();
+            reader.Close();
+
             Dorm_Type();
             return RedirectToAction("Admin_talepler", "Home");
         }
