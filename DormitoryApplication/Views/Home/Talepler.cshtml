@@ -89,7 +89,7 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
                             <option value="" disabled selected>Yurt Tipi</option>
                             
                          @foreach (DormType dormtype in Model.dt){
-                            <option value="@dormtype.Name">@dormtype.Name</option>
+                            <option value="@dormtype.Name">@dormtype.Name @dormtype.Description</option>
                             
                          }
                           </select>

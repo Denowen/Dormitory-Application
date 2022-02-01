@@ -57,7 +57,9 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
 @model IEnumerable<Request>
                             @foreach(var item in Model)
                             {
-            <div class="detail">
+                                <form class="form3" action="/Home/admin_talep_update/@item.Id" method="POST">
+            <div class="detail3">
+                
                 
             <div class="row-content one">
                 <h3>Oda: </h3>
@@ -70,6 +72,10 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
             <div class="row-content three">
                 <h3>Talep Tipi: </h3>
                 <p>@item.RequestName</p>
+            </div>
+            <div class="row-content three">
+                <h3>Id: </h3>
+                <p name="Id">@item.Id</p>
             </div>
             <div class="row-content three">
                 <h3>Talep: </h3>
@@ -90,9 +96,10 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
             
         </div>
 
-        <div class="btnpart">
-            <a href="/Home/TalepEnd/@item.Id"><button class="btn">Sonlandır</button></a>
+        <div class="btnpart3">
+            <a ><button class="btn">Sonlandır</button></a>
         </div>
+        </form>
 }
            </div> 
         

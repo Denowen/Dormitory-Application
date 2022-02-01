@@ -12,7 +12,7 @@ namespace DormitoryApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-         public string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
+         public string conString = "Data Source=DESKTOP-N9HBLJE;Initial Catalog=Dormitory_App;Integrated Security=True";
         CookieOptions cookie = new CookieOptions();
 
         public HomeController(ILogger<HomeController> logger)
@@ -584,11 +584,13 @@ namespace DormitoryApplication.Controllers
             {
                 int Id = (int)reader3["Id"];
                 string Name = reader3["Name"].ToString();
+                string Name2 = reader3["Description"].ToString();
 
                 var req = new DormType();
 
                 req.Id = Id;
                 req.Name = Name;
+                req.Description = Name2;
 
                 dormtype.Add(req);
 
@@ -1209,7 +1211,7 @@ namespace DormitoryApplication.Controllers
                 SqlConnection con2 = new SqlConnection(conString);
 
                 con2.Open();
-                string sql2 = "SELECT s.Id, s.isDone, v.Name FROM Dormitory_App.[dbo].[Requests] s JOIN Dormitory_App.[dbo].[RequestsType] v ON s.RequestTypeId = v.Id WHERE s.UserSchoolId ='" + "217CS2013" + "'";
+                string sql2 = "SELECT s.Id, s.isDone, v.Name FROM Dormitory_App.[dbo].[Requests] s JOIN Dormitory_App.[dbo].[RequestsType] v ON s.RequestTypeId = v.Id WHERE s.UserSchoolId ='" + UserSchoolId + "'";
 
                 SqlCommand cmd2 = new SqlCommand(sql2, con2);
 
@@ -1367,8 +1369,27 @@ namespace DormitoryApplication.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult admin_talep_update(int id, Request rq)
+        {
+            Console.WriteLine(id);
+            Console.WriteLine(rq.Response);
+            string schoolid = Request.Cookies["schoolId"];
+
+            SqlConnection con = new SqlConnection(conString);
+
+            con.Open();
+
+            
+            string query2 = "UPDATE Dormitory_App.[dbo].[Requests] SET Response='" + rq.Response + "', isDone='" + 1 + "' WHERE Id='" + id + "'";
+            SqlCommand cmd2 = new SqlCommand(query2, con);
+
+            cmd2.ExecuteNonQuery();
 
 
+            Dorm_Type();
+            return RedirectToAction("Admin_talepler", "Home");
+        }
 
             
 
