@@ -12,6 +12,7 @@
         public string? DormId { get; set; }
         public string? DormName { get; set; }
         public string? DormTypeName { get; set; }
+        public int? RecoveryCode { get; set; }
 
     }
 }

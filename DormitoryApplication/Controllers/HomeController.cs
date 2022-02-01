@@ -6,12 +6,13 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 
+
 namespace DormitoryApplication.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-         public string conString = "Data Source=DESKTOP-N9HBLJE;Initial Catalog=Dormitory_App;Integrated Security=True";
+         public string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
         CookieOptions cookie = new CookieOptions();
 
         public HomeController(ILogger<HomeController> logger)
@@ -299,7 +300,7 @@ namespace DormitoryApplication.Controllers
             
             con.Open();
             
-            
+           
             List<AllDorms> DormsModel = new List<AllDorms>();
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -354,7 +355,7 @@ namespace DormitoryApplication.Controllers
             
             reader.Close();
             
-            
+  
 
         }
         public ActionResult Dorm_Type()
@@ -762,6 +763,91 @@ namespace DormitoryApplication.Controllers
                     smtp.Send(mail);
                 }
             }
+        }
+
+        [HttpPost]
+        public ActionResult Sifreunuttum(User usr)
+        {
+            Random random = new Random();
+            int recCode = random.Next(1000, 9999);
+            Response.Cookies.Append("sif_mail", usr.Email, cookie);
+
+            SqlConnection con = new SqlConnection(conString);
+
+            string query = "SELECT * FROM Dormitory_App.[dbo].[User] WHERE Email='" + usr.Email + "'";
+            SqlCommand cmd = new SqlCommand(query,con);
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string query2 = "UPDATE Dormitory_App.[dbo].[User] SET RecoveryCode='" + recCode + "' WHERE Email='" + usr.Email + "'";
+
+            SqlCommand cmd2 = new SqlCommand(query2, con);
+
+            bool flag = false;
+
+            if (reader.Read())
+            {
+                flag = true;
+               
+            }
+            reader.Close();
+
+
+            if (flag)
+            {
+                cmd2.ExecuteNonQuery();
+                MailSender("<p>Şifrenizi kurtarmanız için kurtarma kodunuz: </p>" + "<h3>" + recCode + "</h3>" + "Lütfen şifre kurtarma ekranında yazan kodu giriniz.", usr.Email, "Şifre Kurtarma");
+                return RedirectToAction("Sifreunuttum2", "Home");
+            }
+            else
+            {
+
+                return RedirectToAction("Giris", "Home");
+            }
+            con.Close();
+           
+        }
+
+        [HttpPost]
+        public ActionResult Sifreunuttum2(User usr)
+        {
+            string sif_mail = Request.Cookies["sif_mail"];
+
+            SqlConnection con = new SqlConnection(conString);
+
+            string query = "SELECT * FROM Dormitory_App.[dbo].[User] WHERE Email='" + sif_mail + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            bool flag = false;
+            if (reader.Read())
+            {
+                int recCode = (int)reader["RecoveryCode"];
+                if (recCode == usr.RecoveryCode && usr.Password == usr.Password2)
+                {
+                    flag = true;
+                }
+            }
+            
+            reader.Close();
+
+            string query2 = "UPDATE Dormitory_App.[dbo].[User] SET Password='" + usr.Password + "' WHERE Email='" + sif_mail + "'";
+
+            SqlCommand cmd2 = new SqlCommand(query2, con);
+
+            if (flag)
+            {
+                cmd2.ExecuteNonQuery();
+                MailSender("<p>Şifreniz başarıyla değiştirilmiştir.</p>", sif_mail, "Şifre Değiştirildi");
+                return RedirectToAction("Giris", "Home");
+
+            }
+            else
+            {
+                return RedirectToAction("Sifreunuttum2", "Home");
+            }
+
+
         }
 
 

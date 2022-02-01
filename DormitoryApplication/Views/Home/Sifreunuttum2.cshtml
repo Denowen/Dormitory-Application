@@ -24,13 +24,16 @@
     </div>
     
 <div class="login-container"> 
-    <form action="/Home/Giris">
+    <form action="/Home/Sifreunuttum2" method="post">
         <h2>Şifre Yenileme</h2>
         <div class="input-div one">
-            <input class="input" placeholder="Şifre" type="password">
+            <input class="input" name="RecoveryCode" placeholder="Kurtarma Kodu" type="number">
         </div>
         <div class="input-div one">
-            <input class="input" placeholder="Şifre Tekrar" type="password">
+            <input class="input" name="Password" placeholder="Şifre" type="password">
+        </div>
+        <div class="input-div one">
+            <input class="input" name="Password2" placeholder="Şifre Tekrar" type="password">
         </div>
         <input type="submit" class="btn" value="GÖNDER">
     </form>
