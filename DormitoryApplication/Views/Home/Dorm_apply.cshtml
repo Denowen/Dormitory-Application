@@ -6,9 +6,6 @@
     
 }
 
-@{
-Context.Request.Cookies.TryGetValue("Bearer", out string value);
-}
 
 
 <!DOCTYPE html>
@@ -81,8 +78,10 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
                 <form style="display: flex;" action="/Home/Dorm_Apply3" method="POST">
                 <select name="Name" class="request-list" >
                     <option value="" disabled selected>Yurt Listesi</option>
+                    @if(Model.dt != null){
                    @foreach (DormType dormtype in Model.dt){
                             <option name="Name" id="Name" value="@dormtype.Name">@dormtype.Name</option>
+                         }
                          }
                     
                 </select>
@@ -101,7 +100,7 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
                                     <div class="col col-4">Oda Arkadaşı</div>
                                     <div class="col col-5">Seç</div>
                                 </li>
-                                
+                                @if(Model.dorms != null){
                                 @foreach (AllDorms alldo in Model.dorms)
                                 {
                                         <li class="table-row">
@@ -111,6 +110,7 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
                                         <div class="col col-4" data-label="Oda Arkadaşı">@alldo.RoomMate</div>
                                         <a class="btn" href="/Home/ChooseDorm/@alldo.Id">Seç</a>
                                         </li> 
+                                }
                                 }
                                 
                                 

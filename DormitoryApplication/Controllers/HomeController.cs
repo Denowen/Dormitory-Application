@@ -12,7 +12,7 @@ namespace DormitoryApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-         public string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
+         public string conString = "Data Source=DESKTOP-N9HBLJE;Initial Catalog=Dormitory_App;Integrated Security=True";
         CookieOptions cookie = new CookieOptions();
 
         public HomeController(ILogger<HomeController> logger)

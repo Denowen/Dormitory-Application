@@ -64,6 +64,7 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
                           <div class="col col-3">Kapasite</div>
                           <div class="col col-3">Seç</div>
                         </li>
+                        @if(Model.dorms != null){
                          @foreach (var item in Model.dorms)
                             {
                             <li class="table-row">
@@ -73,6 +74,7 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
                             <div class="col col-3" data-label="kapasite">@item.Capacity</div>
                             <a class="btn" href="/Home/DeleteRoom/@item.Id">Sil</a>
                           </li>  
+                            }
                             }
                             
                          
