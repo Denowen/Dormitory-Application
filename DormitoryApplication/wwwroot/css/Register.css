@@ -62,7 +62,8 @@ body {
     position: absolute;
     bottom: 0;
     width: -webkit-fill-available;
-    height: 150px;
+    height: 100px;
+    max-height: max-content;
     left: 0;
     right: 0
 }

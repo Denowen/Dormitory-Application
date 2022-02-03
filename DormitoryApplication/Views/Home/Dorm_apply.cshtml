@@ -77,7 +77,6 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
             <div class="option">
                 <form style="display: flex;" action="/Home/Dorm_Apply3" method="POST">
                 <select name="Name" class="request-list" >
-                    <option value="" disabled selected>Yurt Listesi</option>
                     @if(Model.dt != null){
                    @foreach (DormType dormtype in Model.dt){
                             <option name="Name" id="Name" value="@dormtype.Name">@dormtype.Name</option>

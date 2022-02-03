@@ -83,15 +83,16 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
                              }
                           </select>
                     </div>
+                    @foreach (AllDorms alldo in Model.dorms){
                     <div class="dorm-type-part">
                         <select class="dorm-type-list" name="dormType">
                             
                             <option value="" disabled selected>Yurt Tipi</option>
                             
-                         @foreach (DormType dormtype in Model.dt){
-                            <option value="@dormtype.Name">@dormtype.Name @dormtype.Description</option>
+                         
+                            <option value="@alldo.DormTypeName">@alldo.DormTypeName</option>
                             
-                         }
+                         
                           </select>
                     </div>
                     <div class="dorm-room-part">
@@ -99,12 +100,13 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
                         <select class="dorm-room-list" name="dormNo">
                             <option value="" disabled selected>Oda</option>
                             
-                        @foreach (AllDorms alldo in Model.dorms){
+                        
                             <option value="@alldo.DormNo">@alldo.DormNo</option>
                             
-                         }
+                         
                           </select>
                     </div>
+                    }
                     <div class="description-part" >
                         <textarea placeholder="Talebinizi Açıklayınız." name="description" class="description" cols="900" rows="15" style="resize: none; overflow: auto;"></textarea>
                     </div>
