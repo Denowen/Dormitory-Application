@@ -12,7 +12,7 @@ namespace DormitoryApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-         public string conString = "Data Source=DESKTOP-N9HBLJE;Initial Catalog=Dormitory_App;Integrated Security=True";
+         public string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
         CookieOptions cookie = new CookieOptions();
 
         public HomeController(ILogger<HomeController> logger)
@@ -454,6 +454,14 @@ namespace DormitoryApplication.Controllers
                 cmd2.ExecuteNonQuery();
 
                 con.Close();
+
+                string query2 = "UPDATE Dormitory_App.[dbo].[Requests] SET DormType='" + selectedDorm.DormNo + "' WHERE Id='" + selectedDorm.Id + "'";
+
+                SqlCommand cmd4 = new SqlCommand(query2, con);
+                con.Open();
+                cmd4.ExecuteNonQuery();
+
+                con.Close();
             }
             else
             {
@@ -643,13 +651,60 @@ namespace DormitoryApplication.Controllers
         public ActionResult DeleteDorm(int id)
         {
 
-            SqlConnection con = new SqlConnection(conString);
+            SqlConnection con0 = new SqlConnection(conString);
 
-            string query = "DELETE FROM Dormitory_App.[dbo].[DormType] WHERE Id='" + id + "'";
-            SqlCommand cmd = new SqlCommand(query, con);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
+            string query0 = "SELECT * FROM Dormitory_App.[dbo].[DormType] WHERE Id='" + id + "'";
+            SqlCommand cmd0 = new SqlCommand(query0, con0);
+            con0.Open();
+            SqlDataReader reader = cmd0.ExecuteReader();
+            string dormTypeName = "";
+            if (reader.Read())
+            {
+                dormTypeName = reader["Name"].ToString();
+            }
+            con0.Close();
+            reader.Close();
+
+            SqlConnection con1 = new SqlConnection(conString);
+
+            string query1 = "DELETE FROM Dormitory_App.[dbo].[DormType] WHERE Id='" + id + "'";
+            SqlCommand cmd1 = new SqlCommand(query1, con1);
+            con1.Open();
+            cmd1.ExecuteNonQuery();
+            con1.Close();
+
+            SqlConnection con2 = new SqlConnection(conString);
+
+            string query2 = "DELETE FROM Dormitory_App.[dbo].[Dorms] WHERE DormTypeId='" + id + "'";
+            SqlCommand cmd2 = new SqlCommand(query2, con2);
+            con2.Open();
+            cmd2.ExecuteNonQuery();
+            con2.Close();
+
+            SqlConnection con3 = new SqlConnection(conString);
+
+            string query3 = "UPDATE Dormitory_App.[dbo].[User] SET DormTypeId=NULL, DormId=NULL WHERE DormTypeId='" + id + "'";
+            SqlCommand cmd3 = new SqlCommand(query3, con3);
+            con3.Open();
+            cmd3.ExecuteNonQuery();
+            con3.Close();
+
+            SqlConnection con4 = new SqlConnection(conString);
+
+            string query4 = "DELETE FROM Dormitory_App.[dbo].[Applications] WHERE dormTypeId='" + id + "'";
+            SqlCommand cmd4 = new SqlCommand(query4, con4);
+            con4.Open();
+            cmd4.ExecuteNonQuery();
+            con4.Close();
+
+
+            SqlConnection con5 = new SqlConnection(conString);
+
+            string query5 = "DELETE FROM Dormitory_App.[dbo].[Requests] WHERE DormType='" + dormTypeName + "'";
+            SqlCommand cmd5 = new SqlCommand(query5, con5);
+            con5.Open();
+            cmd5.ExecuteNonQuery();
+            con5.Close();
 
 
 
@@ -671,6 +726,15 @@ namespace DormitoryApplication.Controllers
                 SqlCommand cmd2 = new SqlCommand(query, con);
                 con.Open();
                 cmd2.ExecuteNonQuery();
+
+                con.Close();
+
+
+                string query2 = "UPDATE Dormitory_App.[dbo].[Requests] SET DormType='" + dormtype.Name + "' WHERE Id='" + dormtype.Id + "'";
+
+                SqlCommand cmd4 = new SqlCommand(query2, con);
+                con.Open();
+                cmd4.ExecuteNonQuery();
 
                 con.Close();
             }
@@ -706,6 +770,31 @@ namespace DormitoryApplication.Controllers
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
+
+            SqlConnection con3 = new SqlConnection(conString);
+
+            string query3 = "UPDATE Dormitory_App.[dbo].[User] SET DormTypeId=NULL, DormId=NULL WHERE DormId='" + id + "'";
+            SqlCommand cmd3 = new SqlCommand(query3, con3);
+            con3.Open();
+            cmd3.ExecuteNonQuery();
+            con3.Close();
+
+            SqlConnection con4 = new SqlConnection(conString);
+
+            string query4 = "DELETE FROM Dormitory_App.[dbo].[Applications] WHERE dormId='" + id + "'";
+            SqlCommand cmd4 = new SqlCommand(query4, con4);
+            con4.Open();
+            cmd4.ExecuteNonQuery();
+            con4.Close();
+
+            
+            //SqlConnection con5 = new SqlConnection(conString);
+
+            //string query5 = "DELETE FROM Dormitory_App.[dbo].[Requests] WHERE DormType='" + dormTypeName + "'";
+            //SqlCommand cmd5 = new SqlCommand(query5, con5);
+            //con5.Open();
+            //cmd5.ExecuteNonQuery();
+            //con5.Close();
 
         }
 
