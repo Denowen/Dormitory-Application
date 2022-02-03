@@ -12,7 +12,7 @@ namespace DormitoryApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-         public string conString = "Data Source=DESKTOP-N9HBLJE;Initial Catalog=Dormitory_App;Integrated Security=True";
+         public string conString = "Data Source=LAPTOP-N7FBE5OG;Initial Catalog=Dormitory_App;Integrated Security=True";
         CookieOptions cookie = new CookieOptions();
 
         public HomeController(ILogger<HomeController> logger)
@@ -189,7 +189,7 @@ namespace DormitoryApplication.Controllers
             List<AllDorms> DormsModel = new List<AllDorms>();
 
             SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read()) { 
+           
 
             while (reader.Read())
             {
@@ -247,10 +247,7 @@ namespace DormitoryApplication.Controllers
             reader.Close();
 
 
-            }
-            else { 
-            return RedirectToAction("Dorm_Apply","Home");
-            }
+           
         }
 
 
@@ -837,6 +834,7 @@ namespace DormitoryApplication.Controllers
             return result;
         }
 
+
         public static void MailSender(string body, string sendEmail, string subject)
         {
             using (MailMessage mail = new MailMessage())
@@ -1128,6 +1126,11 @@ namespace DormitoryApplication.Controllers
         public IActionResult Odeme()
         {
             bool res = checkPay();
+            bool res2 = checkApplication();
+            if (!res2)
+            {
+                return RedirectToAction("Dorm_apply", "Home");
+            }
             if (res)
             {
                 return View("Success", "Home");
