@@ -1,0 +1,229 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using DormitoryApplication.Models;
+@model Profile;
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/Profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Profilim</title>
+  </head>
+  <body>
+    <div class="page">
+      <div class="sidebar">
+        <div class="logo_bar">
+          <div class="logo_img">
+            <img src="/img/iu_logo-beyaz.png" />
+          </div>
+          <div class="logo_name">Dormitory Application</div>
+        </div>
+
+        <ul class="nav_list">
+          <li>
+            <a href="/Home/Index">
+              <span class="links_name">Anasayfa</span>
+            </a>
+            <span class="tooltip">Anasayfa</span>
+          </li>
+          <li>
+            <a href="/Home/Dorm_apply">
+              <span class="links_name">Yurt Başvurusu</span>
+            </a>
+            <span class="tooltip">Yurt Başvurusu</span>
+          </li>
+          <li>
+            <a href="/Home/Talepler">
+              <span class="links_name">Talep</span>
+            </a>
+            <span class="tooltip">Talep</span>
+          </li>
+          <li>
+            <a href="/Home/Odeme">
+              <span class="links_name">Ödemeler</span>
+            </a>
+            <span class="tooltip">Ödemeler</span>
+          </li>
+          <li>
+            <a href="/Home/Profile">
+              <span class="links_name">Profilim</span>
+            </a>
+            <span class="tooltip">Profilim</span>
+          </li>
+        </ul>
+        <div class="profile_content">
+          <div class="name">@{
+Context.Request.Cookies.TryGetValue("name", out string value2);
+}
+@value2</div>
+          <div class="logout">
+            <a href="/Home/giris" id="logout"
+              ><i class="fa fa-sign-out" style="font-size: 20px"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-content">
+        <div class="user-detail-part">
+          <h2 class="header">Kullanıcı Bilgilerim</h2>
+          <form action="/Home/Profile_edit" method="post" class="user-form">
+            @foreach (User usr in Model.usr){
+              <div class="user-form-detail">
+                <div class="user-form-left">
+                   
+                    <div class="user-form-row">
+                        <label>İsim</label>
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          value="@usr.Name"
+                          disabled
+                          class="user-input"
+                        />
+                      </div>
+                      <div class="user-form-row">
+                          <label>Soyisim</label>
+                          <input
+                            type="text"
+                            name="surname"
+                            id="surname"
+                            value="@usr.Lname"
+                            disabled
+                            class="user-input"
+                          />
+                        </div>
+                        <div class="user-form-row">
+                          <label>Cinsiyet</label>
+                          <input
+                            type="text"
+                            name="gender"
+                            id="gender"
+                            value="@usr.Gender"
+                            disabled
+                            class="user-input"
+                          />
+                        </div>
+                        <div class="user-form-row">
+                          <label>Email</label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            value="@usr.Email"
+                            disabled
+                            class="user-input"
+                          />
+                        </div>
+                        <div class="user-form-row">
+                          <label>Okul Numarası</label>
+                          <input
+                            type="text"
+                            name="schoolId"
+                            id="schoolId"
+                            value="@usr.SchoolId"
+                            disabled
+                            class="user-input"
+                          />
+                        </div>
+                  </div>
+                  <div class="user-form-right">
+                    <div class="user-form-row">
+                        <label>Şifre</label>
+                        <input
+                          type="password"
+                          name="password"
+                          id="passowrd"
+                          class="user-input"
+                        />
+                      </div>
+                      <div class="user-form-row">
+                          <label>Şifre Onay</label>
+                          <input
+                            type="password"
+                            name="password2"
+                            id="password2"
+                            class="user-input"
+                          />
+                        </div>
+                        <div class="user-form-row">
+                          <label>Yurt Tipi</label>
+                          <input
+                            type="text"
+                            name="dormType"
+                            id="dormType"
+                            value="@usr.DormTypeName"
+                            disabled
+                            class="user-input"
+                          />
+                        </div>
+                        <div class="user-form-row">
+                          <label>Oda Numarası</label>
+                          <input
+                            type="text"
+                            name="dormNo"
+                            id="dormNo"
+                            value="@usr.DormName"
+                            disabled
+                            class="user-input"
+                          />
+                        </div>
+                  </div>
+              </div>
+              }
+              <div class="user-form-button-part">
+                  <button class="submit-button" type="submit">Güncelle</button>
+              </div>
+          </form>
+        </div>
+        <div class="form-part">
+          <h2 class="header">Taleplerim</h2>
+          <form class="oda_sil">
+            <div class="home1">
+              <div class="yurtlar" id="mavi">
+                <ul
+                  class="responsive-table"
+                  style="overflow: auto; max-height: 30rem"
+                >
+                  <li class="table-header">
+                    <div class="col col-1">Talep Tipi</div>
+                    <div class="col col-2">Talep Sonucu</div>
+                    <div class="col col-3">Seç</div>
+                  </li>
+                  @foreach(Request req in Model.req){
+                                    string done = "";
+                                    if (@req.isDone == 1)
+                                    {
+                                        done = "Talep sonlandı";
+                                    }
+                                    else
+                                    {
+                                        done = "Bekleniyor";
+                                    }
+                                    <li class="table-row">
+                    <div class="col col-1" data-label="Talep Tipi">@req.RequestName</div>
+                    <div class="col col-2 center" data-label="Talep Sonucu">@done</div>
+                    <a class="btn" href="/Home/usrDetay/@req.Id">Görüntüle</a>
+                  </li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+  </body>
+</html>

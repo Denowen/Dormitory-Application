@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Anasayfa";
 }
+@model IEnumerable<DormType>
 
 
 <!DOCTYPE html>
@@ -25,34 +26,43 @@
       </div>
 
       <ul class="nav_list">
-        <li>
-          <a href="/Home/Index">
-            <span class="links_name">Anasayfa</span>
-          </a>
-          <span class="tooltip">Anasayfa</span>
-        </li>
-        <li>
-          <a href="/Home/Dorm_apply">
-            <span class="links_name">Yurt Başvurusu</span>
-          </a>
-          <span class="tooltip">Yurt Başvurusu</span>
-        </li>
-        <li>
-          <a href="/Home/Talepler">
-            <span class="links_name">Talep</span>
-          </a>
-          <span class="tooltip">Talep</span>
-        </li>
-        <li>
-          <a href="/Home/Odeme">
-            <span class="links_name">Ödemeler</span>
-          </a>
-          <span class="tooltip">Ödemeler</span>
-        </li>
-      </ul>
+          <li>
+            <a href="/Home/Index">
+              <span class="links_name">Anasayfa</span>
+            </a>
+            <span class="tooltip">Anasayfa</span>
+          </li>
+          <li>
+            <a href="/Home/Dorm_apply">
+              <span class="links_name">Yurt Başvurusu</span>
+            </a>
+            <span class="tooltip">Yurt Başvurusu</span>
+          </li>
+          <li>
+            <a href="/Home/Talepler">
+              <span class="links_name">Talep</span>
+            </a>
+            <span class="tooltip">Talep</span>
+          </li>
+          <li>
+            <a href="/Home/Odeme">
+              <span class="links_name">Ödemeler</span>
+            </a>
+            <span class="tooltip">Ödemeler</span>
+          </li>
+          <li>
+            <a href="/Home/Profile">
+              <span class="links_name">Profilim</span>
+            </a>
+            <span class="tooltip">Profilim</span>
+          </li>
+        </ul>
       <div class="profile_content">
-        <div class="name">Mert Berkan Akdeniz</div>
-        <div class="logout"><a href="/Home/Giris" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
+        <div class="name">@{
+Context.Request.Cookies.TryGetValue("name", out string value2);
+}
+@value2</div>
+        <div class="logout"><a href="/Home/Logout" id="logout"><i class="fa fa-sign-out" style="font-size:20px"></i></a> </div>
       </div>
     </div>
 
@@ -89,25 +99,20 @@
                 <div class="col col-3">Güz Dönemi</div>
                 <div class="col col-4">Yıllık</div>
               </li>
+              
+                                @foreach (var item in Model)
+                                {
+                                    if (item.Name == "Turuncu" && item.Gender=="Kız")
+                                    {
+                                        var price2 = item.Price / 2;
               <li class="table-row">
-                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (1 kişilik)</div>
-                <div class="col col-2" data-label="bahar">13.875₺</div>
-                <div class="col col-3" data-label="güz">13.875₺</div>
-                <div class="col col-4" data-label="yıllık">27.750₺</div>
+                <div class="col col-1" data-label="yurt">@item.Name @item.Description</div>
+                <div class="col col-2" data-label="bahar">@price2₺</div>
+                <div class="col col-3" data-label="güz">@price2₺</div>
+                <div class="col col-4" data-label="yıllık">@item.Price₺</div>
               </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı bahçe katı, kuzey cephe)
-                </div>
-                <div class="col col-2" data-label="bahar">4.800₺</div>
-                <div class="col col-3" data-label="güz">4.800₺</div>
-                <div class="col col-4" data-label="yıllık">9.600₺</div>
-              </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı)</div>
-                <div class="col col-2" data-label="bahar">5.200₺</div>
-                <div class="col col-3" data-label="güz">5.200₺</div>
-                <div class="col col-4" data-label="yıllık">10.400₺</div>
-              </li>
+                                    }
+                                    }
             </ul>
             <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Erkek</h3>
             <ul class="responsive-table">
@@ -117,25 +122,19 @@
                 <div class="col col-3">Güz Dönemi</div>
                 <div class="col col-4">Yıllık</div>
               </li>
+                                @foreach (var item in Model)
+                                {
+                                    if (item.Name == "Turuncu" && item.Gender=="Erkek")
+                                    {
+                                        var price2 = item.Price / 2;
               <li class="table-row">
-                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (1 kişilik)</div>
-                <div class="col col-2" data-label="bahar">13.875₺</div>
-                <div class="col col-3" data-label="güz">13.875₺</div>
-                <div class="col col-4" data-label="yıllık">27.750₺</div>
+                <div class="col col-1" data-label="yurt">@item.Name @item.Description</div>
+                <div class="col col-2" data-label="bahar">@price2₺</div>
+                <div class="col col-3" data-label="güz">@price2₺</div>
+                <div class="col col-4" data-label="yıllık">@item.Price₺</div>
               </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı bahçe katı, kuzey cephe)
-                </div>
-                <div class="col col-2" data-label="bahar">4.800₺</div>
-                <div class="col col-3" data-label="güz">4.800₺</div>
-                <div class="col col-4" data-label="yıllık">9.600₺</div>
-              </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Turuncu Yurtlar (3 kişilik ranzalı)</div>
-                <div class="col col-2" data-label="bahar">5.200₺</div>
-                <div class="col col-3" data-label="güz">5.200₺</div>
-                <div class="col col-4" data-label="yıllık">10.400₺</div>
-              </li>
+                                    }
+                                    }
             </ul>
           </div>
           <div class="yurtlar" id="mavi">
@@ -148,25 +147,19 @@
                 <div class="col col-3">Güz Dönemi</div>
                 <div class="col col-4">Yıllık</div>
               </li>
+              @foreach (var item in Model)
+                                {
+                                    if (item.Name == "Mavi" && item.Gender=="Kız")
+                                    {
+                                        var price2 = item.Price / 2;
               <li class="table-row">
-                <div class="col col-1" data-label="yurt">Mavi Yurtlar (1 kişilik)</div>
-                <div class="col col-2" data-label="bahar">11.850₺</div>
-                <div class="col col-3" data-label="güz">11.850₺</div>
-                <div class="col col-4" data-label="yıllık">23.700₺</div>
+                <div class="col col-1" data-label="yurt">@item.Name @item.Description</div>
+                <div class="col col-2" data-label="bahar">@price2₺</div>
+                <div class="col col-3" data-label="güz">@price2₺</div>
+                <div class="col col-4" data-label="yıllık">@item.Price₺</div>
               </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Mavi Yurtlar (3 kişilik ranzalı deniz manzaralı)
-                </div>
-                <div class="col col-2" data-label="bahar">4.750₺</div>
-                <div class="col col-3" data-label="güz">4.750₺</div>
-                <div class="col col-4" data-label="yıllık">9.500₺</div>
-              </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Mavi Yurtlar (3 kişilik ranzalı)</div>
-                <div class="col col-2" data-label="bahar">4.575₺</div>
-                <div class="col col-3" data-label="güz">4.575₺</div>
-                <div class="col col-4" data-label="yıllık">9.150₺</div>
-              </li>
+                                    }
+                                    }
             </ul>
             <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Erkek</h3>
             <ul class="responsive-table">
@@ -176,25 +169,19 @@
                 <div class="col col-3">Güz Dönemi</div>
                 <div class="col col-4">Yıllık</div>
               </li>
+              @foreach (var item in Model)
+                                {
+                                    if (item.Name == "Mavi" && item.Gender=="Erkek")
+                                    {
+                                        var price2 = item.Price / 2;
               <li class="table-row">
-                <div class="col col-1" data-label="yurt">Mavi Yurtlar (1 kişilik)</div>
-                <div class="col col-2" data-label="bahar">11.850₺</div>
-                <div class="col col-3" data-label="güz">11.850₺</div>
-                <div class="col col-4" data-label="yıllık">23.700₺</div>
+                <div class="col col-1" data-label="yurt">@item.Name @item.Description</div>
+                <div class="col col-2" data-label="bahar">@price2₺</div>
+                <div class="col col-3" data-label="güz">@price2₺</div>
+                <div class="col col-4" data-label="yıllık">@item.Price₺</div>
               </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Mavi Yurtlar (3 kişilik ranzalı deniz manzaralı)
-                </div>
-                <div class="col col-2" data-label="bahar">4.750₺</div>
-                <div class="col col-3" data-label="güz">4.750₺</div>
-                <div class="col col-4" data-label="yıllık">9.500₺</div>
-              </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Mavi Yurtlar (3 kişilik ranzalı)</div>
-                <div class="col col-2" data-label="bahar">4.575₺</div>
-                <div class="col col-3" data-label="güz">4.575₺</div>
-                <div class="col col-4" data-label="yıllık">9.150₺</div>
-              </li>
+                                    }
+                                    }
             </ul>
           </div>
           <div class="yurtlar" id="bordo">
@@ -207,24 +194,19 @@
                 <div class="col col-3">Güz Dönemi</div>
                 <div class="col col-4">Yıllık</div>
               </li>
+              @foreach (var item in Model)
+                                {
+                                    if (item.Name == "Bordo" && item.Gender=="Kız")
+                                    {
+                                        var price2 = item.Price / 2;
               <li class="table-row">
-                <div class="col col-1" data-label="yurt">Bordo Yurtlar (1 kişilik balkonlu-wc-banyolu)</div>
-                <div class="col col-2" data-label="bahar">12.425₺</div>
-                <div class="col col-3" data-label="güz">12.425₺</div>
-                <div class="col col-4" data-label="yıllık">24.850₺</div>
+                <div class="col col-1" data-label="yurt">@item.Name @item.Description</div>
+                <div class="col col-2" data-label="bahar">@price2₺</div>
+                <div class="col col-3" data-label="güz">@price2₺</div>
+                <div class="col col-4" data-label="yıllık">@item.Price₺</div>
               </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Bordo Yurtlar (3 kişilik ranzalı balkonlu-wc-banyolu)</div>
-                <div class="col col-2" data-label="bahar">5.100₺</div>
-                <div class="col col-3" data-label="güz">5.100₺</div>
-                <div class="col col-4" data-label="yıllık">10.200₺</div>
-              </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Bordo Yurtlar (3 kişilik ranzasız-wc-banyolu)</div>
-                <div class="col col-2" data-label="bahar">6.950₺</div>
-                <div class="col col-3" data-label="güz">6.950₺</div>
-                <div class="col col-4" data-label="yıllık">13.900₺</div>
-              </li>
+                                    }
+                                    }
             </ul>
             <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Erkek</h3>
             <ul class="responsive-table">
@@ -234,24 +216,19 @@
                 <div class="col col-3">Güz Dönemi</div>
                 <div class="col col-4">Yıllık</div>
               </li>
+              @foreach (var item in Model)
+                                {
+                                    if (item.Name == "Bordo" && item.Gender=="Erkek")
+                                    {
+                                        var price2 = item.Price / 2;
               <li class="table-row">
-                <div class="col col-1" data-label="yurt">Bordo Yurtlar (1 kişilik balkonlu wc/banyo dışarıda)</div>
-                <div class="col col-2" data-label="bahar">11.850₺</div>
-                <div class="col col-3" data-label="güz">11.850₺</div>
-                <div class="col col-4" data-label="yıllık">23.700₺</div>
+                <div class="col col-1" data-label="yurt">@item.Name @item.Description</div>
+                <div class="col col-2" data-label="bahar">@price2₺</div>
+                <div class="col col-3" data-label="güz">@price2₺</div>
+                <div class="col col-4" data-label="yıllık">@item.Price₺</div>
               </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Bordo Yurtlar (3 kişilik ranzalı balkonlu wc/banyo dışarıda)</div>
-                <div class="col col-2" data-label="bahar">4.625₺</div>
-                <div class="col col-3" data-label="güz">4.625₺</div>
-                <div class="col col-4" data-label="yıllık">9.250₺</div>
-              </li>
-              <li class="table-row">
-                <div class="col col-1" data-label="yurt">Bordo Yurtlar (3 kişilik ranzasız wc/banyo dışarıda)</div>
-                <div class="col col-2" data-label="bahar">4.925₺</div>
-                <div class="col col-3" data-label="güz">4.925₺</div>
-                <div class="col col-4" data-label="yıllık">9.850₺</div>
-              </li>
+                                    }
+                                    }
             </ul>
           </div>
         </div>

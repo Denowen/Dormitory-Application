@@ -1,5 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Admin Talep Detay";
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "User Talep Detay";
 }
 
 <!DOCTYPE html>
@@ -21,25 +26,37 @@
             </div>
             
             <ul class="nav_list">
-                <li>
-                    <a href="/Home/Admin_yurt_secenekler">
-                        <span class="links_name">Yurt Seçenekleri</span>
-                    </a>
-                    <span class="tooltip">Yurt Seçenekleri</span>
-                </li>
-                <li>
-                    <a href="/Home/Admin_oda">
-                        <span class="links_name">Oda Seçenekleri</span>
-                    </a>
-                    <span class="tooltip">Oda Seçenekleri</span>
-                </li>
-                <li>
-                    <a href="/Home/Admin_talepler">
-                        <span class="links_name">Talepleri Görüntüle</span>
-                    </a>
-                    <span class="tooltip">Talepleri Görüntüle</span>
-                </li>
-            </ul>
+          <li>
+            <a href="/Home/Index">
+              <span class="links_name">Anasayfa</span>
+            </a>
+            <span class="tooltip">Anasayfa</span>
+          </li>
+          <li>
+            <a href="/Home/Dorm_apply">
+              <span class="links_name">Yurt Başvurusu</span>
+            </a>
+            <span class="tooltip">Yurt Başvurusu</span>
+          </li>
+          <li>
+            <a href="/Home/Talepler">
+              <span class="links_name">Talep</span>
+            </a>
+            <span class="tooltip">Talep</span>
+          </li>
+          <li>
+            <a href="/Home/Odeme">
+              <span class="links_name">Ödemeler</span>
+            </a>
+            <span class="tooltip">Ödemeler</span>
+          </li>
+          <li>
+            <a href="/Home/Profile">
+              <span class="links_name">Profilim</span>
+            </a>
+            <span class="tooltip">Profilim</span>
+          </li>
+        </ul>
             <div class="profile_content">
                 <div class="name">@{
 Context.Request.Cookies.TryGetValue("name", out string value2);
@@ -51,15 +68,13 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
         <div class="home_content">
             
             <div class="back-nav">
-               <div><a href="/Home/Admin_talepler" id="geridon" style="color: black;"><i class="fa fa-chevron-left" style="font-size:20px"></i></a></div> 
+               <div><a href="/Home/Profile" id="geridon" style="color: black;"><i class="fa fa-chevron-left" style="font-size:20px"></i></a></div> 
                <div style="margin-left: 1rem;"><h4>Geri dön</h4></div>
             </div>
 @model IEnumerable<Request>
                             @foreach(var item in Model)
                             {
-                                <form class="form3" action="/Home/admin_talep_update/@item.Id" method="POST">
-            <div class="detail3">
-                
+            <div class="detail">
                 
             <div class="row-content one">
                 <h3>Oda: </h3>
@@ -74,32 +89,21 @@ Context.Request.Cookies.TryGetValue("name", out string value2);
                 <p>@item.RequestName</p>
             </div>
             <div class="row-content three">
-                <h3>Id: </h3>
-                <p name="Id">@item.Id</p>
-            </div>
-            <div class="row-content three">
                 <h3>Talep: </h3>
                 <div class="parag">
                     <p>@item.Description</p>
                 </div>
-                
             </div>
-
             <div class="row-content three">
                 <h3>Cevap: </h3>
                 <div class="parag">
-                   <textarea name="Response"></textarea>
+                    <p>@item.Response</p>
                 </div>
-                
             </div>
 
             
         </div>
 
-        <div class="btnpart3">
-            <a ><button class="btn">Sonlandır</button></a>
-        </div>
-        </form>
 }
            </div> 
         
